@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server:dev": "nodemon"
+    "server:dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.0"
+    "mongodb": "^3.6.0",
+    "spotify-web-api-node": "^4.0.0"
   },
   "devDependencies": {
     "body-parser": "^1.19.0",
