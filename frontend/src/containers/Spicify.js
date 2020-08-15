@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Home from '../components/Home';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 class Spicify extends Component {
@@ -11,7 +12,7 @@ class Spicify extends Component {
 
     render() {
         return (
-            <h1>Hello</h1>
+            <Home />
         )
     }
 }

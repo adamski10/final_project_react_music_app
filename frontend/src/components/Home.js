@@ -1,9 +1,10 @@
 import React from 'react';
+import MoodSelector from './MoodSelector';
 
-const Home = () => {
+const Home = (props) => {
 
     return (
-        null
+        <MoodSelector />
     )
 
 }
