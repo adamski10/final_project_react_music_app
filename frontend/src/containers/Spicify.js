@@ -6,13 +6,19 @@ class Spicify extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            valence: null
         }
     }
 
     render() {
         return (
-            <Home />
+            <Router>
+                <>
+                    <Route 
+                        path="/spicify"
+                        render={() => <Home />} />
+                </>
+            </Router>
         )
     }
 }
