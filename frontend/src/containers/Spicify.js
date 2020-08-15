@@ -11,7 +11,9 @@ class Spicify extends Component {
 
     render() {
         return (
-            null
+            <h1>Hello</h1>
         )
     }
 }
+
+export default Spicify;
