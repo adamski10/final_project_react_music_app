@@ -75,33 +75,39 @@ app.get('/playlists', async (req,res) => {
 app.post('/upload', async (req, result) => {
   const  {postData}  = req.body;
   
+  //our azure key (will be moved to back-end)
   const subscriptionKey = '93ecc4bb25084ec184cce4d68f0869ae';
+
+  //our azure endpoint (will be moved to back-end)
   const url = 'https://spicifytest.cognitiveservices.azure.com/face/v1.0/detect';
 
-  
-
+  //this is the function that makes the Azure Face API call
   const callCognitiveApi = (data) => {
     const config = {
+        // application/octet-stream is a format to stream an image blob 
         headers: { 'content-type': 'application/octet-stream', 'Ocp-Apim-Subscription-Key': subscriptionKey },
+        // these are the Azure params 
         params : {
             returnFaceId: true,
             returnFaceLandmarks: false,
+            //we can add more to these like sex, age etc
             returnFaceAttributes: 'emotion'
             }
         };
        const response = axios
-        .post(url, data, config)
-        .then((res) => {
-            result.status(200).json(res.data[0].faceAttributes.emotion);
-            console.log(res);
-            console.log(res.data[0].faceAttributes.emotion)
-        })
-        .catch((error) => {
-            result.status(200).send(error);
-            console.error(error);
-        });
+            .post(url, data, config)
+            .then((res) => {
+              result.status(200).json(res.data[0].faceAttributes.emotion);
+              console.log(res);
+              console.log(res.data[0].faceAttributes.emotion)
+              console.log(res.data[0].faceAttributes.age)
+            })
+            .catch((error) => {
+              result.status(200).send(error);
+              console.error(error);
+            });
   };
-
+  //This function converts base64 encoding to a blob
   const b64toBlob = (b64DataStr, contentType = '', sliceSize = 512) => {
     const byteCharacters = atob(b64DataStr);
     const byteArrays = [];
@@ -121,10 +127,11 @@ app.post('/upload', async (req, result) => {
     return blob;
   };
 
+  //we split the imageSrc so we can just get at the image data (at index 1), we're not interested in the metadata (at index 0)
   const splitImageSrc = postData.split(',');
   const blob = b64toBlob(splitImageSrc[1]);
 
-  // const bufferPromise = blob.arrayBuffer();
+  // arrayBuffer() returns a promise that waits for the blob to stream as an arrayBuffer to Axios's post request
   const buffer = await blob.arrayBuffer();
 
   callCognitiveApi(buffer);
