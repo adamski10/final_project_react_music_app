@@ -1,0 +1,9 @@
+Play
+Pause
+Back
+Next
+Shuffle
+Add playlist
+generate playlist
+Spotify
+Camera
