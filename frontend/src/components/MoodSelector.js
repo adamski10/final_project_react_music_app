@@ -1,11 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import WebcamCapture from './Webcam'
 
-export default function MoodSelector(props) {
+function MoodSelector(props) {
 
     
 
     return (
-        <input></input>
+        <>
+            <input></input>
+            <h1>Hello from mood selector</h1>
+            <WebcamCapture/>
+        </>
     )
 
 }
