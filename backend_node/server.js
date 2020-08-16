@@ -7,6 +7,10 @@ const MongoClient = require('mongodb').MongoClient;
 const BodyParser = require('body-parser');
 const cors = require('cors');
 const createRouter = require('./helpers/create_router.js')
+const axios = require('axios');
+const atob = require('atob');
+const Blob = require("cross-blob");
+
 
 //cors and body parser
 app.use(cors());
@@ -68,10 +72,66 @@ app.get('/playlists', async (req,res) => {
   
   });
 
-app.post('/upload', (req, res) => {
-  const image = req.body;
-  console.log(image);
-  res.status(200).send(image)
+app.post('/upload', async (req, result) => {
+  const  {postData}  = req.body;
+  
+  const subscriptionKey = '93ecc4bb25084ec184cce4d68f0869ae';
+  const url = 'https://spicifytest.cognitiveservices.azure.com/face/v1.0/detect';
+
+  
+
+  const callCognitiveApi = (data) => {
+    const config = {
+        headers: { 'content-type': 'application/octet-stream', 'Ocp-Apim-Subscription-Key': subscriptionKey },
+        params : {
+            returnFaceId: true,
+            returnFaceLandmarks: false,
+            returnFaceAttributes: 'emotion'
+            }
+        };
+       const response = axios
+        .post(url, data, config)
+        .then((res) => {
+            result.status(200).json(res.data[0].faceAttributes.emotion);
+            console.log(res);
+            console.log(res.data[0].faceAttributes.emotion)
+        })
+        .catch((error) => {
+            result.status(200).send(error);
+            console.error(error);
+        });
+  };
+
+  const b64toBlob = (b64DataStr, contentType = '', sliceSize = 512) => {
+    const byteCharacters = atob(b64DataStr);
+    const byteArrays = [];
+  
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+  
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+  
+      const byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    const blob = new Blob(byteArrays, { type: contentType });
+    return blob;
+  };
+
+  const splitImageSrc = postData.split(',');
+  const blob = b64toBlob(splitImageSrc[1]);
+
+  // const bufferPromise = blob.arrayBuffer();
+  const buffer = await blob.arrayBuffer();
+
+  callCognitiveApi(buffer);
+  
+  
+  
+
 })
 
 app.listen(port, () => {

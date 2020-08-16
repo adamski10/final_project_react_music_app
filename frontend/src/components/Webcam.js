@@ -43,7 +43,7 @@ const WebcamCapture = () => {
     const uploadImageToBackend = (postData) => {
         axios.post('http://localhost:8080/upload', {postData})
         .then((response) => {
-            console.log(response)
+            console.log(response.data)
         })
         .catch((error)=>{
             console.error(error);
@@ -51,7 +51,7 @@ const WebcamCapture = () => {
 
     }
     //this turns our base64 encoded image to a binary which is easier to send over the internet
-    const b64toBlob = (b64DataStr: string, contentType = '', sliceSize = 512) => {
+    const b64toBlob = (b64DataStr, contentType = '', sliceSize = 512) => {
         const byteCharacters = atob(b64DataStr);
         const byteArrays = [];
       
