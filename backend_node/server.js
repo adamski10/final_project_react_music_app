@@ -37,7 +37,7 @@ app.listen(port, () => {
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
     clientSecret: process.env.CLIENT_SECRET,
-    redirectUri: "http://localhost:3000/pleasework"
+    redirectUri: "http://localhost:8080/"
 });
 
 const scope = ["user-library-read user-follow-modify user-read-recently-played app-remote-control user-follow-read playlist-read-private user-read-currently-playing\
@@ -53,25 +53,38 @@ app.get('/login', (req,res) => {
 
 app.get('/', async (req,res) => {
     const { code } = req.query;
-    console.log(code)
     try {
       let data = await spotifyApi.authorizationCodeGrant(code)
       const { access_token, refresh_token } = data.body;
       spotifyApi.setAccessToken(access_token);
       spotifyApi.setRefreshToken(refresh_token);
   
-      res.redirect('http://localhost:3001/spicify');
+      res.redirect('http://localhost:8080/songs');
     } 
     catch(err) {
       res.redirect('/#/error/invalid token');
     }
 });
 
-app.get('/playlists', async (req,res) => {
+app.get('/songs', async (req,res) => {
     try {
-      let result = await spotifyApi.getUserPlaylists();
-    //   console.log(result.body);
-      res.status(200).send(result.body);
+      const array_of_playlist_song_ids = await spotifyApi.getUserPlaylists({limit: 50})
+      .then((data) => {
+        return data.body.items.map(playlist => {
+          return spotifyApi.getPlaylistTracks(playlist.id)
+        })
+      })
+      .then((promises) => {
+        return Promise.all(promises)
+      })
+      .then((playlist_tracks) => {
+        return playlist_tracks.map((playlist) => {
+          return playlist.body.items.map((playlist_item) => {return playlist_item.track.id})
+        })
+      })
+    
+
+    res.status(200).send(array_of_playlist_song_ids)
     } catch (err) {
       res.status(400).send(err)
     }
@@ -80,6 +93,20 @@ app.get('/playlists', async (req,res) => {
 app.get('/:id', (req, res) => {
     const token = req.params.id;
     res.json(token);
+})
+
+app.get("/refresh_token", (req, res) => {
+  spotifyApi.refreshAccessToken().then(
+    function(data) {
+      console.log('The access token has been refreshed!');
+  
+      // Save the access token so that it's used in future calls
+      spotifyApi.setAccessToken(data.body['access_token']);
+    },
+    function(err) {
+      console.log('Could not refresh access token', err);
+    }
+  );
 })
 
   
