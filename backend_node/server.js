@@ -100,14 +100,13 @@ app.post('/upload', async (req, result) => {
               result.status(200).json(res.data[0].faceAttributes.emotion);
               console.log(res);
               console.log(res.data[0].faceAttributes.emotion)
-              console.log(res.data[0].faceAttributes.age)
             })
             .catch((error) => {
               result.status(200).send(error);
               console.error(error);
             });
   };
-  //This function converts base64 encoding to a blob
+  //This function converts base64 encoded image to a blob (binary large blob)
   const b64toBlob = (b64DataStr, contentType = '', sliceSize = 512) => {
     const byteCharacters = atob(b64DataStr);
     const byteArrays = [];
@@ -136,9 +135,6 @@ app.post('/upload', async (req, result) => {
 
   callCognitiveApi(buffer);
   
-  
-  
-
 })
 
 app.listen(port, () => {
