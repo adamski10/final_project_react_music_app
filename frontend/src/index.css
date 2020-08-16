@@ -16,6 +16,7 @@ code {
 
 .home {
   border: solid black 1px;
+  border-radius: 15%;
   background-color: coral;
   display: flex;
   justify-content: center;
@@ -25,4 +26,5 @@ code {
   margin-right: 30%;
   margin-top: 5%;
   padding: 40px;
+
 }
