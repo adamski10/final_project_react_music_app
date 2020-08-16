@@ -10,7 +10,7 @@ const createRouter = require('./helpers/create_router.js')
 
 //cors and body parser
 app.use(cors());
-app.use(BodyParser.json());
+app.use(BodyParser.json({limit: '50mb'}));
 
 //database environment variable
 const databaseURL = process.env.DATABASE_URL;
@@ -22,9 +22,7 @@ MongoClient.connect(databaseURL)
     .catch(console.error);
 
 const port = process.env.PORT;
-app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-})
+
 
 const spotifyApi = new SpotifyWebApi({
     clientId: process.env.CLIENT_ID,
@@ -70,4 +68,12 @@ app.get('/playlists', async (req,res) => {
   
   });
 
-  
+app.post('/upload', (req, res) => {
+  const image = req.body;
+  console.log(image);
+  res.status(200).send(image)
+})
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+})

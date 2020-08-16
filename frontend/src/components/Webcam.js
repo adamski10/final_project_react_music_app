@@ -29,21 +29,6 @@ const WebcamCapture = () => {
                 }
             };
 
-            // const params = {
-            //     params : {
-            //         returnFaceId: true,
-            //         returnFaceLandmarks: false,
-            //         returnFaceAttributes: 'emotion'
-            //         }
-            //     };
-
-        // const params = {
-        //         params : {
-        //             returnFaceId: true,
-        //             returnFaceLandmarks: false,
-        //             returnFaceAttributes: 'emotion'
-        //             }
-        //         };
         const response = axios
             .post(url, data, config)
             .then((res) => {
@@ -54,7 +39,18 @@ const WebcamCapture = () => {
                 console.error(error);
             });
     };
-    //this turns out base64 encoded image to a binary which is easier to send over the internet
+
+    const uploadImageToBackend = (postData) => {
+        axios.post('http://localhost:8080/upload', {postData})
+        .then((response) => {
+            console.log(response)
+        })
+        .catch((error)=>{
+            console.error(error);
+        })
+
+    }
+    //this turns our base64 encoded image to a binary which is easier to send over the internet
     const b64toBlob = (b64DataStr: string, contentType = '', sliceSize = 512) => {
         const byteCharacters = atob(b64DataStr);
         const byteArrays = [];
@@ -80,6 +76,9 @@ const WebcamCapture = () => {
     const capture = useCallback(() => {
         //we get the screenshot and set it as imageSrc
       const imageSrc = webcamRef.current.getScreenshot() || '';
+      console.log(imageSrc);
+      uploadImageToBackend(imageSrc);
+
         //we split the imageSrc so we can just get at the image data, we're not interested in the metadata
       const splitImageSrc = imageSrc.split(',');
       const blob = b64toBlob(splitImageSrc[1]);
