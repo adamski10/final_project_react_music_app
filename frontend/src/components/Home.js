@@ -4,7 +4,9 @@ import MoodSelector from './MoodSelector';
 const Home = (props) => {
 
     return (
-        <MoodSelector />
+        <>
+            <MoodSelector />
+        </>
     )
 
 }

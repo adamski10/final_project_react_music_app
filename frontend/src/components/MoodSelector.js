@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MoodSelector = () => {
+const MoodSelector = (props) => {
 
     return (
 
