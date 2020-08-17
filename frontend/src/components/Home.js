@@ -1,20 +1,30 @@
-import React from 'react';
+import React, {Component} from 'react';
 import MoodSelector from './MoodSelector';
 import Logo from './Logo.js'
 import MoodTracker from './MoodTracker.js'
 import PlayBar from './PlayBar.js'
 import PlayList from './PlayList.js'
 
-const Home = (props) => {
+class Home extends Component {
 
-    return (
-        <div className="home">
-            <Logo />
-            <MoodSelector />
-            <PlayBar />
-            <PlayList />
-        </div>
-    )
+    constructor(props) {
+        super(props)
+    }
+
+    componentDidMount() {
+        this.props.handleLoggedIn();
+    }
+
+    render() {
+        return (
+            <div className="home">
+                <Logo />
+                <MoodSelector />
+                <PlayBar />
+                <PlayList />
+            </div>
+        )
+        }
 
 }
 

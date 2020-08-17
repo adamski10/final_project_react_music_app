@@ -11,17 +11,27 @@ class Spicify extends Component {
         this.state = {
             valence: null,
             tracks: null,
-            userSongs: []
+            userSongs: [],
+            loggedIn: false
         }
+        this.changeLoggedIn = this.changeLoggedIn.bind(this);
+
     }
 
-    componentDidMount() {
-        const url = "http://localhost:8080/songs"
+    changeLoggedIn() {
+        this.setState({ loggedIn: true })
+    }
 
-        fetch(url)
-        .then(res => res.json())
-        .then(userSongs => this.setState({ userSongs }))
-        .catch(err => console.error)
+    //Will fetch from backend once logged in
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.loggedIn !== this.state.loggedIn) {
+            const url = "http://localhost:8080/songs"
+
+            fetch(url)
+            .then(res => res.json())
+            .then(userSongs => this.setState({ userSongs: userSongs }))
+            .catch(err => console.error)
+        }
     };
 
     render() {
@@ -31,7 +41,7 @@ class Spicify extends Component {
                     <Route exact path="/" component={Login}/>
                     <Route 
                         path="/spicify"
-                        render={() => <Home />} />
+                        render={() => <Home handleLoggedIn={this.changeLoggedIn}/>} />
                 </>
             </Router>
         )

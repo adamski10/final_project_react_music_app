@@ -62,7 +62,7 @@ app.get('/', async (req,res) => {
       spotifyApi.setAccessToken(access_token);
       spotifyApi.setRefreshToken(refresh_token);
   
-      res.redirect('http://localhost:8080/songs');
+      res.redirect('http://localhost:3000/spicify');
     } 
     catch(err) {
       res.redirect('/#/error/invalid token');
