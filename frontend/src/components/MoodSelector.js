@@ -24,9 +24,9 @@ const MoodSelector = (props) => {
                     trackColor="#eeeeee"
                     trackSize={24}
                     hideLabelValue="true"
-                    min="0"
-                    max="1.00"
-                    data= {[]}    
+                    min={0}
+                    max={1} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
+                    // data= {}    
                     dataIndex={sliderValance}
                     onChange={ value => { setSliderValance(value) }  }
                     
