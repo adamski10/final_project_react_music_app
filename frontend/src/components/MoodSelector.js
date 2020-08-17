@@ -38,13 +38,11 @@ const MoodSelector = (props) => {
                 </div>
                 <div className="slide-bars-container">
                     <label for="energy">Energy</label>
-                        <input onChange={value => {props.setSliderEnergy(value)}} className="slide-bars"  id ="energy" type="range" min="0" max="1" ></input>
+                        <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="slide-bars"  id ="energy" type="range" min="0" max="100" ></input>
                     <label for="dance-mood">Dance mood</label>
-                        <input onChange={value => {props.setSliderDanciness(value)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="1" ></input>
+                        <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="100" ></input>
                     <label for="energy">?????</label>
                         <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
-                    
-                    
                 </div>
                 <h1>Hello from mood selector</h1>
             
