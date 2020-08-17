@@ -13,6 +13,7 @@ const encodeFormData = require('./helpers/encodeFormData');
 const queryString = require('querystring');
 const fetch = require('node-fetch');
 let request = require('request');
+const { promises } = require('fs');
 
 //cors and body parser
 app.use(express.json());
@@ -66,28 +67,39 @@ app.get('/', async (req,res) => {
     }
 });
 
-app.get('/songs', async (req,res) => {
-    try {
-      const array_of_playlist_song_ids = await spotifyApi.getUserPlaylists({limit: 50})
-      .then((data) => {
-        return data.body.items.map(playlist => {
-          return spotifyApi.getPlaylistTracks(playlist.id)
-        })
-      })
-      .then((promises) => {
-        return Promise.all(promises)
-      })
-      .then((playlist_tracks) => {
-        return playlist_tracks.map((playlist) => {
-          return playlist.body.items.map((playlist_item) => {return playlist_item.track.id})
-        })
-      })
-    
+const convertPromisesToOne = (promises) => {
+  return Promise.all(promises)
+}
 
-    res.status(200).send(array_of_playlist_song_ids)
-    } catch (err) {
-      res.status(400).send(err)
-    }
+const getAllTracksForPlaylists = (playlists) => {
+  return playlists.body.items.map(playlist => {
+    return spotifyApi.getPlaylistTracks(playlist.id)
+  })
+}
+
+//GET LIST OF ALL USER'S SONGS WITH THEIR AUDIO FEATURES
+app.get('/songs', (req,res) => {
+  try {
+    spotifyApi.getUserPlaylists({limit: 50}).catch((e) => {console.log(e.message)})
+    .then(getAllTracksForPlaylists)
+    .then(convertPromisesToOne)
+    .then((playlistTracks) => {
+      const trackIds = playlistTracks.map((playlist) => {
+        return playlist.body.items.map((playlistItem) => {return playlistItem.track.id})
+      }).flat()
+
+      const tracksMoodsPromises = trackIds.map(id => {
+        return spotifyApi.getAudioFeaturesForTrack(id)
+          .then(result => result.body)
+      })
+
+      Promise.all(tracksMoodsPromises)
+        .then(tracksMoods => res.json(tracksMoods))
+    })
+
+  } catch (err) {
+    res.status(400).send(err)
+  }
 });
 
 app.get('/:id', (req, res) => {
