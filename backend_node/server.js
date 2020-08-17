@@ -88,7 +88,7 @@ app.get('/', (req, res) => {
           },
           body: encodeFormData(body1)
       })
-      .then(res => res.json())
+      .then(result => result.json())
       .then(data => {
           access_token = data.access_token;
           refresh_token = data.refresh_token;

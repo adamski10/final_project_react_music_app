@@ -3,6 +3,7 @@ import Home from '../components/Home';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-js';
 import { SpotifyApiContext } from 'react-spotify-api';
+import SpotifyWebPlayer from '../components/WebPlayer';
 
 class Spicify extends Component {
     constructor(props) {
@@ -32,6 +33,7 @@ class Spicify extends Component {
         return (
             <Router>
                 <>
+                    <SpotifyWebPlayer></SpotifyWebPlayer>
                     <Route 
                         path="/spicify"
                         render={() => <Home />} />
