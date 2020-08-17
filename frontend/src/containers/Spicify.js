@@ -8,10 +8,10 @@ class Spicify extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            valence: null,
-            danciness: null,
+            valence: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
+            danciness: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
+            energy: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
             tracks: null,
-            energy: null,
             emotionApiResponse: {}
         }
         this.setEmotion = this.setEmotion.bind(this)
