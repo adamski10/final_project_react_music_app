@@ -9,10 +9,12 @@ class SpotifyWebPlayer extends Component {
             webPlayer: null,
             playerResume: null,
             playerPause: null,
-            device_id: null
+            device_id: null,
+            volume: null
         }
         this.handleScriptError = this.handleScriptError.bind(this);
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
+        this.setPlayerVolume = this.setPlayerVolume.bind(this);
         this.pausePlayback = this.pausePlayback.bind(this);
         this.startPlayback = this.startPlayback.bind(this);
     }
@@ -41,6 +43,13 @@ class SpotifyWebPlayer extends Component {
                 })
             })  
         }
+    }
+
+    setPlayerVolume(volume) {
+        this.state.webPlayer.setVolume(volume.target.value);
+        this.setState({
+            volume: volume.target.value
+        })
     }
 
     pausePlayback() {
@@ -76,6 +85,16 @@ class SpotifyWebPlayer extends Component {
                 />
                 <button onClick={this.pausePlayback}>DON'T STOP ME NOW</button>
                 <button onClick={this.startPlayback}>HIT ME BABY ONE MORE TIME</button>
+                <label for="volume-slider">Set Volume</label>
+                <input 
+                    type="range" 
+                    id="volume-slider" 
+                    min="0" 
+                    max="1" 
+                    step="0.01"
+                    value={this.state.volume}
+                    onChange={this.setPlayerVolume}>
+                </input>
             </>
         )
     }
