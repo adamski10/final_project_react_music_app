@@ -7,3 +7,4 @@ Add playlist
 generate playlist
 Spotify
 Camera
+Emojis

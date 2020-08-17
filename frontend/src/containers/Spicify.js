@@ -1,27 +1,29 @@
 import React, {Component} from 'react';
-import MoodSelector from '../components/MoodSelector';
+import Home from '../components/Home';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+
+
 
 class Spicify extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
-            moodValence: null
+            valence: null,
+            tracks: null
         }
-    }
-
-    setMood(newValence) {
-        
     }
 
     render() {
         return (
-            <MoodSelector valence={this.state.moodValence} />
+            <Router>
+                <>
+                    <Route 
+                        path="/spicify"
+                        render={() => <Home />} />
+                </>
+            </Router>
         )
     }
-        
-    
-
 }
 
 export default Spicify;
