@@ -5,7 +5,11 @@ import { ReactComponent as EmojiIcon } from '../Images/smileyface.svg';
 
 const MoodSelector = (props) => {    
 
-    const [sliderValance, setSliderValance] = useState(180);
+    const [sliderValance, setSliderValance] = useState();
+    useEffect( () => { setSliderValance(props.emotion)}, [ props.emotion ] );
+
+
+    //it checks for the props.emotion changing and when it detects a change it calls usestate and passes in props.emotion
 
     return (
         <>
@@ -19,9 +23,12 @@ const MoodSelector = (props) => {
                     progressSize={15}
                     trackColor="#eeeeee"
                     trackSize={24}
+                    hideLabelValue="true"
+                    min="0"
+                    max="1.00"
                     data= {[]}    
                     dataIndex={sliderValance}
-                    onChange={ value => { setSliderValance(value) } }
+                    onChange={ value => { setSliderValance(value) }  }
                     
                 >
                 <EmojiIcon x="9" y="9" width="18px" height="18px" />
