@@ -22,9 +22,35 @@ code {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  margin-left: 30%;
-  margin-right: 30%;
+  max-width: 800px;
+  margin: 0 auto;
   margin-top: 5%;
-  padding: 40px;
+  /* padding: 40px; */
 
 }
+
+.webcam{
+    width: 250px;
+    height: 250px;
+    border-radius: 125px;
+    -webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: translateY(-35%);
+    z-index: 1;
+    
+} 
+.capture-button{
+  position: absolute;
+  transform: translateY(-500%);
+}
+
+video {
+  width: auto;
+  height: 100%;
+}
+
+

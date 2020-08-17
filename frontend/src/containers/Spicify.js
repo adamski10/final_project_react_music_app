@@ -9,8 +9,14 @@ class Spicify extends Component {
         super(props);
         this.state = {
             valence: null,
-            tracks: null
+            tracks: null,
+            emotionApiResponse: null
         }
+        this.setEmotion = this.setEmotion.bind(this)
+    }
+
+    setEmotion(value){
+        this.setState({emotionApiResponse: value})
     }
 
     render() {
@@ -19,7 +25,7 @@ class Spicify extends Component {
                 <>
                     <Route 
                         path="/spicify"
-                        render={() => <Home />} />
+                        render={() => <Home setEmotion={this.setEmotion}/>} />
                 </>
             </Router>
         )

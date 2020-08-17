@@ -3,7 +3,7 @@ import Webcam from "react-webcam";
 import axios from 'axios';
 
  
-const WebcamCapture = () => {
+const WebcamCapture = (props) => {
     // This creates a blank reference that any HTML element can later use to identify itself https://reactjs.org/docs/hooks-reference.html#useref
     // Then the <Webcam> element can identify itself by saying "ref={webcamRef}" now other functions can refer directly to that HTML component by refering to it as 'webcamRef'. In this case it's the Capture function 
     const webcamRef = useRef(null);
@@ -16,6 +16,7 @@ const WebcamCapture = () => {
         axios.post('http://localhost:8080/upload', {postData})
         .then((response) => {
             console.log(response.data)
+            props.setEmotion(response.data)
         })
         .catch((error)=>{
             console.error(error);
@@ -32,14 +33,25 @@ const WebcamCapture = () => {
       setImgSrc(imageSrc);
     }, [webcamRef, setImgSrc]);
 
+    const videoConstraints = {
+      width: 1280,
+      height: 720,
+      facingMode: "user"
+    };
+
     return (
       <>
         <Webcam
           audio={false}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
+          height= {420}
+          width= {420}
+          videoConstraints={videoConstraints}
         />
-        <button onClick={capture}>Capture photo</button>
+        
+          <button onClick={capture} className="capture-button">Capture photo</button>
+        
         {imgSrc && (
           <img
             src={imgSrc}
