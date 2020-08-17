@@ -92,13 +92,12 @@ app.get('/', (req, res) => {
       .then(data => {
           access_token = data.access_token;
           refresh_token = data.refresh_token;
-          console.log(access_token);
-          console.log(refresh_token);
           spotifyApi.setAccessToken(access_token);
           spotifyApi.setRefreshToken(refresh_token);
           let query = queryString.stringify(data);
-          res.redirect(`http://localhost:3000/#${query}`);
+          // res.redirect(`http://localhost:3000/#${query}`);
           // res.json(data)
+          res.redirect(`http://localhost:3000/spicify#${query}`);
       })
   } catch (err) {
       res.status(400).send(err) 
