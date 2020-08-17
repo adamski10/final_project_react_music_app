@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Home from '../components/Home';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import SpotifyWebPlayer from '../components/WebPlayer';
 
 class Spicify extends Component {
     constructor(props) {
@@ -81,6 +82,7 @@ class Spicify extends Component {
         return (
             <Router>
                 <>
+                    <SpotifyWebPlayer accessToken={this.state.userToken}></SpotifyWebPlayer>
                     <button onClick={this.fetchMyPlaylists}>PLAYLISTS</button>
                     <button onClick={this.fetchMyPlaylistTracks}>PLAYLIST TRACKS</button>
                     <button onClick={this.fetchMyTracks}>TRACK FEATURES</button>
