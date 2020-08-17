@@ -15,7 +15,7 @@ class Spicify extends Component {
             loggedIn: false
         }
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
-        this.setTracks = this.setTracks.bind(this);
+        this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
     }
 
     changeLoggedIn() {
@@ -33,14 +33,17 @@ class Spicify extends Component {
         }
     };
 
-    checkIfSongIsWithinRange(songCategory, moodCategory) {
+    checkIfSongIsWithinRange(song, mood) {
         const delta = 0.1;
-        if (songCategory <= (moodCategory + delta) && songCategory >= (moodCategory - delta)) {
-            return true
+        const moodKeys = Object.keys(mood);
+        for (const key of moodKeys) {
+            if (song[key] <= (mood[key] += delta) && song[key] >= (mood[key] -= delta)) {
+                return true
+            }
         }
     }
 
-    setTracks() {
+    filterTracksBasedOnMood() {
 
         const mood = {
             valence: 0.5,
@@ -50,14 +53,8 @@ class Spicify extends Component {
             instrumentalness: 0.0
         };
 
-        this.setState({ tracks: this.state.userSongs.filter(song => {
-            if (
-                this.checkIfSongIsWithinRange(song.valence, mood.valence) && 
-                this.checkIfSongIsWithinRange(song.danceability, mood.danceability) &&
-                this.checkIfSongIsWithinRange(song.energy, mood.energy) && 
-                this.checkIfSongIsWithinRange(song.acousticness, mood.acousticness) && 
-                this.checkIfSongIsWithinRange(song.instrumentalness, mood.instrumentalness)
-                ) {
+        this.setState( { tracks: this.state.userSongs.filter(song => {
+            if (this.checkIfSongIsWithinRange(song, mood)) {
                 return song
             }
         })})
@@ -72,7 +69,7 @@ class Spicify extends Component {
                         path="/spicify"
                         render={() => <Home 
                         handleLoggedIn={this.changeLoggedIn}
-                        handleSetTracks={this.setTracks}
+                        handleSetTracks={this.filterTracksBasedOnMood}
                         />} 
                     />
                 </>
