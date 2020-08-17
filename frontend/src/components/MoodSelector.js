@@ -31,13 +31,21 @@ const MoodSelector = (props) => {
                     onChange={ value => { setSliderValance(value) }  }
                     
                 >
-                <EmojiIcon x="9" y="9" width="18px" height="18px" />
+                    <EmojiIcon x="9" y="9" width="18px" height="18px" />
                 </CircularSlider>
                 <div className="webcam">
                     <WebcamCapture setEmotion={props.setEmotion}/>
                 </div>
-         
-                <input></input>
+                <div className="slide-bars-container">
+                    <label for="energy">Energy</label>
+                        <input className="slide-bars"  id ="energy" type="range" min="1" max="100" ></input>
+                    <label for="dance-mood">Dance mood</label>
+                        <input className="slide-bars"  id ="dance-mood"type="range" min="1" max="100" ></input>
+                    <label for="energy">?????</label>
+                        <input className="slide-bars" id="?????" type="range" min="1" max="100" ></input>
+                    
+                    
+                </div>
                 <h1>Hello from mood selector</h1>
             
         </>    
