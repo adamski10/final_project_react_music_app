@@ -54,20 +54,61 @@ app.get('/login', (req,res) => {
     res.redirect(html+"&show_dialog=true")  
 })
 
-app.get('/', async (req,res) => {
-    const { code } = req.query;
-    try {
-      let data = await spotifyApi.authorizationCodeGrant(code)
-      const { access_token, refresh_token } = data.body;
-      spotifyApi.setAccessToken(access_token);
-      spotifyApi.setRefreshToken(refresh_token);
+// app.get('/', async (req,res) => {
+//     const { code } = req.query;
+//     try {
+//       let data = await spotifyApi.authorizationCodeGrant(code)
+//       const { access_token, refresh_token } = data.body;
+//       spotifyApi.setAccessToken(access_token);
+//       spotifyApi.setRefreshToken(refresh_token);
   
-      res.redirect('http://localhost:8080/songs');
-    } 
-    catch(err) {
-      res.redirect('/#/error/invalid token');
-    }
-});
+//       res.redirect('http://localhost:8080/songs');
+//     } 
+//     catch(err) {
+//       res.redirect('/#/error/invalid token');
+//     }
+// });
+
+app.get('/', (req, res) => {
+  let body1 = {
+      grant_type: "authorization_code",
+      code: req.query.code,
+      redirect_uri: process.env.REDIRECT_URI,
+      client_id: process.env.CLIENT_ID,
+      client_secret: process.env.CLIENT_SECRET
+  }
+  let access_token = ""
+  let refresh_token = ""
+  try {
+      fetch('https://accounts.spotify.com/api/token', {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Accept": "application/json"
+          },
+          body: encodeFormData(body1)
+      })
+      .then(res => res.json())
+      .then(data => {
+          access_token = data.access_token;
+          refresh_token = data.refresh_token;
+          console.log(access_token);
+          console.log(refresh_token);
+          spotifyApi.setAccessToken(access_token);
+          spotifyApi.setRefreshToken(refresh_token);
+          let query = queryString.stringify(data);
+          res.redirect(`http://localhost:3000/#${query}`);
+          // res.json(data)
+      })
+  } catch (err) {
+      res.status(400).send(err) 
+  }
+})
+
+app.get('/:id', (req, res) => {
+  const token = req.params.id;
+  res.json(token);
+})
 
 const convertPromisesToOne = (promises) => {
   return Promise.all(promises)
