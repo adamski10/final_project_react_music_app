@@ -10,7 +10,13 @@ const Home = (props) => {
     return (
         <div className="home">
             <Logo />
-            <MoodSelector setEmotion={props.setEmotion} emotion={props.emotion}/>
+            <MoodSelector 
+                setSliderValence={props.setSliderValence} 
+                setEmotion={props.setEmotion} 
+                emotion={props.emotion}
+                setSliderDanciness={props.setSliderDanciness}
+                setSliderEnergy={props.setSliderEnergy}
+            />
             <PlayBar />
             <PlayList />
         </div>

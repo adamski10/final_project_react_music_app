@@ -25,10 +25,10 @@ const MoodSelector = (props) => {
                     trackSize={24}
                     hideLabelValue="true"
                     min={0}
-                    max={1} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
-                    // data= {}    
-                    dataIndex={sliderValance}
-                    onChange={ value => { setSliderValance(value) }  }
+                    max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
+                    data= {[]}    
+                    dataIndex={sliderValance*100}
+                    onChange={ value => { props.setSliderValence(value/100) }  }
                     
                 >
                     <EmojiIcon x="9" y="9" width="18px" height="18px" />
@@ -38,11 +38,11 @@ const MoodSelector = (props) => {
                 </div>
                 <div className="slide-bars-container">
                     <label for="energy">Energy</label>
-                        <input className="slide-bars"  id ="energy" type="range" min="1" max="100" ></input>
+                        <input onChange={value => {props.setSliderEnergy(value)}} className="slide-bars"  id ="energy" type="range" min="0" max="1" ></input>
                     <label for="dance-mood">Dance mood</label>
-                        <input className="slide-bars"  id ="dance-mood"type="range" min="1" max="100" ></input>
+                        <input onChange={value => {props.setSliderDanciness(value)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="1" ></input>
                     <label for="energy">?????</label>
-                        <input className="slide-bars" id="?????" type="range" min="1" max="100" ></input>
+                        <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
                     
                     
                 </div>

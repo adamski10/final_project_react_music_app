@@ -1,6 +1,7 @@
 import React, {useRef, useState, useCallback} from "react";
 import Webcam from "react-webcam";
 import axios from 'axios';
+import bnw_camera_icon from '../Images/bnw_camera_icon.svg'
 
  
 const WebcamCapture = (props) => {
