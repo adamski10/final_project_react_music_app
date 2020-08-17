@@ -8,18 +8,27 @@ import PlayList from './PlayList.js'
 class Home extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.test = this.test.bind(this)
     }
 
     componentDidMount() {
         this.props.handleLoggedIn();
     }
 
+    // handleMoodCaptured(mood) {
+    //     this.props.setTracks(mood);
+    // }
+    test() {
+        this.props.handleSetTracks();
+    }
+
     render() {
         return (
             <div className="home">
                 <Logo />
-                <MoodSelector />
+                <button onClick={this.test}>Heeeey</button>
+                <MoodSelector updateMoodCaptured={this.handleMoodCaptured}/>
                 <PlayBar />
                 <PlayList />
             </div>
