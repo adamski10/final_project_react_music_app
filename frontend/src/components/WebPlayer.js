@@ -28,7 +28,6 @@ class SpotifyWebPlayer extends Component {
 
     handleScriptLoad() {
         window.onSpotifyWebPlaybackSDKReady = () => {
-            console.log(this)
             const token = this.props.accessToken;
             const player = new window.Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',

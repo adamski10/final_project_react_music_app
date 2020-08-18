@@ -122,6 +122,7 @@ class Spicify extends Component {
                     <Route 
                         path="/spicify"
                         render={() => <Home 
+                        tracks={this.state.tracks}    
                         handleSetTracks={this.filterTracksBasedOnMood}    
                         handleLoggedIn={this.changeLoggedIn}
                         setSliderValence={this.setSliderValence} 

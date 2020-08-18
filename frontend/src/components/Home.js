@@ -24,7 +24,6 @@ class Home extends Component {
         return (
             <div className="home">
                 <Logo />
-                <button onClick={this.test}>Heeeey</button>
                 <MoodSelector 
                 setSliderValence={this.props.setSliderValence} 
                 setEmotion={this.props.setEmotion} 
@@ -32,8 +31,9 @@ class Home extends Component {
                 setSliderDanciness={this.props.setSliderDanciness}
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
+                <button onClick={this.test}>Heeeey</button>
                 <PlayBar />
-                <PlayList />
+                <PlayList tracks={this.props.tracks}/>
             </div>
         )
         }
