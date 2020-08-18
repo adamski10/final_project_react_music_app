@@ -55,9 +55,9 @@ video {
 }
 
 .slide-bars-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: 40px 40px 40px;
+  grid-template-rows: 40% 10%;
   
 }
 
@@ -67,38 +67,7 @@ video {
   
 }
 
-/* input[type=range] {
-  -webkit-appearance: none;
-  width: 100%;
-  transform: rotate(-90deg);
-  background: #0d6192;
-  border: none;
-}
 
-input[type=range]::-webkit-slider-runnable-track {
-  background: linear-gradient(to right, red, orange, yellow, green);
-  border-radius: 20px;
-}
-
-input[type=range]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  background: white;
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-}
-
-.label_max {
-  text-align: center;
-  left: -40px;
-}
-
-.label_min {
-  text-align: center;
-  left: -40px;
-  
-} */
 
 
 
