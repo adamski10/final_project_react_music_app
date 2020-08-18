@@ -27,7 +27,7 @@ const MoodSelector = (props) => {
                     min={0}
                     max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
                     data= {[]}    
-                    dataIndex={sliderValance*100}
+                    dataIndex={props.emotion*100}
                     onChange={ value => {props.setSliderValence(value/100)} }
                     
                 >
