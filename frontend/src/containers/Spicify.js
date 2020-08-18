@@ -166,7 +166,8 @@ class Spicify extends Component {
                         setSliderValence={this.setSliderValence} 
                         setSliderDanciness={this.setSliderDanciness}
                         setSliderEnergy={this.setSliderEnergy}
-                        setEmotion={this.setEmotion} 
+                        setEmotion={this.setEmotion}
+                        selectedSongUri={this.selectedSongUri}
                         emotion={this.state.valence}
                         />} 
                     />
