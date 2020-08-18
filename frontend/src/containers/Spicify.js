@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import Home from '../components/Home';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
+import SpotifyWebApi from 'spotify-web-api-js';
+import SpotifyWebPlayer from '../components/WebPlayer';
 import Login from "../components/Login";
-
-
 
 class Spicify extends Component {
     constructor(props) {
         super(props);
+        const params = this.getHashParams();
         this.state = {
             tracks: null,
+            userToken: params.access_token,
             userSongs: [],
             loggedIn: false,
             valence: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
@@ -23,6 +25,19 @@ class Spicify extends Component {
         this.setSliderEnergy = this.setSliderEnergy.bind(this)
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
+    }
+
+    getHashParams() {
+        let hashParams = {};
+        let e, r = /([^&;=]+)=?([^&;]*)/g,
+            q = window.location.hash.substring(1);
+        e = r.exec(q)
+        while (e) {
+           hashParams[e[1]] = decodeURIComponent(e[2]);
+           e = r.exec(q);
+        }
+        return hashParams;
+            
     }
 
     changeLoggedIn() {
@@ -85,6 +100,7 @@ class Spicify extends Component {
         return (
             <Router>
                 <>
+                    <SpotifyWebPlayer accessToken={this.state.userToken}></SpotifyWebPlayer>
                     <Route exact path="/" component={Login}/>
                     <Route 
                         path="/spicify"
