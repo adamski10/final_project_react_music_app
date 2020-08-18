@@ -13,6 +13,7 @@ const PlayList = (props) => {
           artist={track.artists[0].name}
           image={track.album.images[2].url}
           uri={track.uri}
+          handleSelectedSongUri={props.handleSelectedSongUri}
         />
       )
     })

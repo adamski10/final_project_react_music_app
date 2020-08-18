@@ -26,12 +26,24 @@ class Spicify extends Component {
         this.setSliderEnergy = this.setSliderEnergy.bind(this)
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
+        this.handleSongUriContext = this.handleSongUriContext.bind(this);
     }
 
-    handleSongUriContext(selectedUri) {
-        this.setState({
+    // async handleSongUriContext(selectedUri) {
+    //     console.log("I'M CALLED", selectedUri)
+    //     await this.setState({ selectedSongUri: selectedUri })
+    //     console.log(this.state.selectedSongUri)
+    // }
+
+    async handleSongUriContext(selectedUri) {
+        console.log("I'M CALLED", selectedUri)
+        await this.setState(prevState => { 
+           return {
+            ...prevState,
             selectedSongUri: selectedUri
+           } 
         })
+        console.log(this.state.selectedSongUri)
     }
 
     convertEmotionToValance = () =>{
@@ -151,7 +163,8 @@ class Spicify extends Component {
         return (
             <Router>
                 <>
-                    <SpotifyWebPlayer 
+                    <SpotifyWebPlayer
+                        selectedSongUri={this.state.selectedSongUri}
                         accessToken={this.state.userToken}
                         tracks={this.state.tracks}
                         >    
@@ -167,7 +180,7 @@ class Spicify extends Component {
                         setSliderDanciness={this.setSliderDanciness}
                         setSliderEnergy={this.setSliderEnergy}
                         setEmotion={this.setEmotion}
-                        selectedSongUri={this.selectedSongUri}
+                        handleSelectedSongUri={this.handleSongUriContext}
                         emotion={this.state.valence}
                         />} 
                     />

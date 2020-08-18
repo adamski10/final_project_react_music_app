@@ -33,7 +33,7 @@ class Home extends Component {
                 />
                 <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
                 <PlayBar />
-                <PlayList tracks={this.props.tracks}/>
+                <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
             </div>
         )
         }
