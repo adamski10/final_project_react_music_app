@@ -3,83 +3,17 @@ import WebcamCapture from './Webcam';
 import CircularSlider from '@fseehawer/react-circular-slider';
 import { ReactComponent as EmojiIcon } from '../Images/smileyface.svg';
 
-class MoodSelector extends Component {
+const MoodSelector = (props) => {    
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            mood: {
-                valence: 0.5,
-                danceability: 0.5,
-                energy: 0.5,
-                // loudness: null,
-                // speechiness: null,
-                acousticness: 0.5,
-                instrumentalness: 0.5
-                // tempo: 100,
-                // liveness: null
-            }
-        }
-        this.handleValenceInput = this.handleValenceInput.bind(this);
-        this.handleDanceabilityInput = this.handleDanceabilityInput.bind(this);
-        this.handleIntensityInput = this.handleIntensityInput.bind(this);
-        this.handleCheerMeUpInput = this.handleCheerMeUpInput.bind(this);
-        this.handleNewPlaylist = this.handleNewPlaylist.bind(this);
-    }
-    
-    handleNewPlaylist() {
-        this.props.updateMoodCaptured(this.state.mood)
-    }
+    const [sliderValance, setSliderValance] = useState();
+    useEffect( () => { setSliderValance(props.emotion)}, [ props.emotion ] );
 
-    handleValenceInput(event) {
-        let newValence = 0;
-        if (event.target.value === ":D") {
-            newValence = 1.00
-        } else if (event.target.value === ":)") {
-            newValence = 0.75
-        } else if (event.target.value === ":/") {
-            newValence = 0.50
-        } else {
-            newValence = 0.25
-        }
-        this.setState( { mood: { valence: newValence } })
-    }
 
-    handleDanceabilityInput(event) {
-        const newDanceability = event.target.value / 100.0;
-        const newAcousticness = (100 - event.target.value) / 100.0;
-        this.setState( { mood: { danceability: newDanceability, acousticness: newAcousticness } })
-    }
+    //it checks for the props.emotion changing and when it detects a change it calls usestate and passes in props.emotion
 
-    handleIntensityInput(event) {
-        const newEnergy = event.target.value / 100.0;
-        const newInstrumentalness = (100 - event.target.value) / 100.0;
-        this.setState( { mood: { energy: newEnergy, instrumentalness: newInstrumentalness } })
-    }
-
-    handleCheerMeUpInput(event) {
-        if (event.target.value > 50) {
-            if (event.target.value < 75) {
-                const moodBoost = 1.25;
-                this.setState( { mood: {
-                    valence: (this.state.mood.valence * moodBoost),
-                    danceability: (this.state.mood.danceability * moodBoost),
-                    energy: (this.state.mood.energy * moodBoost)
-                } })
-            } else {
-                const moodBoost = 1.50;
-                this.setState( { mood: {
-                    valence: (this.state.mood.valence * moodBoost),
-                    danceability: (this.state.mood.danceability * moodBoost),
-                    energy: (this.state.mood.energy * moodBoost)
-                }})
-            }
-        }
-    }
-
-    render() {
-        return (
-            <>
+    return (
+        <>
+           
                 <CircularSlider
                     label="Mood selector"
                     labelColor="#005a58"
@@ -89,17 +23,31 @@ class MoodSelector extends Component {
                     progressSize={15}
                     trackColor="#eeeeee"
                     trackSize={24}
-                    data={[":D",":)", ":/", ":("]} //...
-                    dataIndex={10}
-                    // onChange={this.handleValenceInput}
+                    hideLabelValue="true"
+                    min={0}
+                    max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
+                    data= {[]}    
+                    dataIndex={sliderValance*100}
+                    onChange={ value => {props.setSliderValence(value/100)} }
+                    
                 >
-                <EmojiIcon x="9" y="9" width="18px" height="18px" />
+                    <EmojiIcon x="9" y="9" width="18px" height="18px" />
                 </CircularSlider>
+                <div className="webcam">
+                    <WebcamCapture setEmotion={props.setEmotion}/>
+                </div>
+                <div className="slide-bars-container"> 
+                    <label for="energy">Energy</label>  
+                        <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="slide-bars"  id ="energy" type="range" min="0" max="100" ></input>
+                    <label for="dance-mood">Dance mood</label>
+                        <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="100" ></input>
+                    <label for="energy">?????</label>
+                        <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
+                </div>
                 <h1>Hello from mood selector</h1>
-                <WebcamCapture/>
-            </>
-        )
+            
+        </>    
+    )
     }
-}
 
-export default MoodSelector;
+ export default MoodSelector

@@ -12,8 +12,17 @@ class Spicify extends Component {
             valence: null,
             tracks: null,
             userSongs: [],
-            loggedIn: false
+            loggedIn: false,
+            valence: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
+            danciness: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
+            energy: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
+            tracks: null,
+            emotionApiResponse: {}
         }
+        this.setEmotion = this.setEmotion.bind(this)
+        this.setSliderValence = this.setSliderValence.bind(this)
+        this.setSliderDanciness = this.setSliderDanciness.bind(this)
+        this.setSliderEnergy = this.setSliderEnergy.bind(this)
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
     }
@@ -58,6 +67,22 @@ class Spicify extends Component {
                 return song
             }
         })})
+            
+    }
+
+    setEmotion(value){
+        this.setState({emotionApiResponse: value})
+    }
+    setSliderValence(value){
+        this.setState({valence: value})
+    }
+    
+    setSliderDanciness(value){
+        this.setState({danciness: value})
+    }
+
+    setSliderEnergy(value){
+        this.setState({energy: value})
     }
 
     render() {
@@ -68,11 +93,16 @@ class Spicify extends Component {
                     <Route 
                         path="/spicify"
                         render={() => <Home 
+                        handleSetTracks={this.filterTracksBasedOnMood}    
                         handleLoggedIn={this.changeLoggedIn}
-                        handleSetTracks={this.filterTracksBasedOnMood}
+                        setSliderValence={this.setSliderValence} 
+                                    setSliderDanciness={this.setSliderDanciness}
+                                    setSliderEnergy={this.setSliderEnergy}
+                                    setEmotion={this.setEmotion} 
+                                    emotion={this.state.emotionApiResponse.happiness}
                         />} 
                     />
-                </>
+                </>            
             </Router>
         )
     }

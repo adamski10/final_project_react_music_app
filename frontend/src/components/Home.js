@@ -16,9 +16,6 @@ class Home extends Component {
         this.props.handleLoggedIn();
     }
 
-    // handleMoodCaptured(mood) {
-    //     this.props.setTracks(mood);
-    // }
     test() {
         this.props.handleSetTracks();
     }
@@ -28,7 +25,13 @@ class Home extends Component {
             <div className="home">
                 <Logo />
                 <button onClick={this.test}>Heeeey</button>
-                <MoodSelector updateMoodCaptured={this.handleMoodCaptured}/>
+                <MoodSelector 
+                setSliderValence={this.props.setSliderValence} 
+                setEmotion={this.props.setEmotion} 
+                emotion={this.props.emotion}
+                setSliderDanciness={this.props.setSliderDanciness}
+                setSliderEnergy={this.props.setSliderEnergy}
+                />
                 <PlayBar />
                 <PlayList />
             </div>
