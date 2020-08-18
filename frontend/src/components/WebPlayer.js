@@ -15,12 +15,15 @@ class SpotifyWebPlayer extends Component {
         this.handleScriptError = this.handleScriptError.bind(this);
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
         this.setPlayerVolume = this.setPlayerVolume.bind(this);
+        this.setPreviousTrack = this.setPreviousTrack.bind(this);
+        this.setNextTrack = this.setNextTrack.bind(this);
+        this.resumePlayback = this.resumePlayback.bind(this);
         this.pausePlayback = this.pausePlayback.bind(this);
         this.startPlayback = this.startPlayback.bind(this);
     }
 
     handleScriptError() {
-        console.log("GTFO, NERD")
+        console.log("SPICY. GTFO, NERD.")
     }
 
     handleScriptLoad() {
@@ -37,7 +40,6 @@ class SpotifyWebPlayer extends Component {
             })
             player.addListener('ready', ({ device_id }) => {
                 // console.log(device_id)
-                // this.props.handleDeviceId(device_id)
                 this.setState({
                     device_id: device_id
                 })
@@ -49,6 +51,29 @@ class SpotifyWebPlayer extends Component {
         this.state.webPlayer.setVolume(volume.target.value);
         this.setState({
             volume: volume.target.value
+        })
+    }
+
+    setPreviousTrack() {
+        this.state.webPlayer.previousTrack()
+        .then(() => {
+            console.log("Previous track")
+        })
+    }
+
+    setNextTrack() {
+        this.state.webPlayer.nextTrack()
+        .then(() => {
+            console.log("Set to next track")
+        })
+    }
+
+    resumePlayback() {
+        this.state.webPlayer.resume()
+        .then(() => {
+            this.setState({
+                playerPause: false
+            })
         })
     }
 
@@ -72,6 +97,9 @@ class SpotifyWebPlayer extends Component {
                 "uris": ["spotify:track:43LrnQSfEZULp0nRhOqdU3", "spotify:track:5uEnSz3GJbQeI1bEhvzKyb", "spotify:track:0cJZTQ1x6ko3gbtoLKaoQe", "spotify:track:1ZUsnvMUqF0uJkhhjZlvcY"]
             })
         })
+        this.setState({
+            playerPause: false
+        })
     }
 
     render() {
@@ -81,9 +109,20 @@ class SpotifyWebPlayer extends Component {
                     url="https://sdk.scdn.co/spotify-player.js"
                     onCreate={this.handleScriptCreate}
                     onError={this.handleScriptError} 
-                    onLoad={this.handleScriptLoad}
-                />
-                <button onClick={this.pausePlayback}>DON'T STOP ME NOW</button>
+                    onLoad={this.handleScriptLoad}>
+                </Script>
+                <button onClick={this.setPreviousTrack}>Previous</button>
+                <button onClick={() => {
+                    if (!this.state.playerPause) {
+                        this.pausePlayback()
+                    }
+                    else {
+                          this.resumePlayback()
+                    }
+                }}>
+                    {this.state.playerPause ? "CAUSE I'M HAVING A GOOD TIME" : "DON'T STOP ME NOW"}
+                </button>
+                <button onClick={this.setNextTrack}>Next</button>
                 <button onClick={this.startPlayback}>HIT ME BABY ONE MORE TIME</button>
                 <label for="volume-slider">Set Volume</label>
                 <input 
@@ -92,7 +131,7 @@ class SpotifyWebPlayer extends Component {
                     min="0" 
                     max="1" 
                     step="0.01"
-                    value={this.state.volume}
+                    // value={this.state.volume}
                     onChange={this.setPlayerVolume}>
                 </input>
             </>
