@@ -53,11 +53,10 @@ const MoodSelector = (props) => {
                     trackSize={24}
                     hideLabelValue="true"
                     min={0}
-                    max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
+                    max={1000} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
                     data= {[]}    
-                    dataIndex={props.emotion*100}
-                    onChange={ value => {props.setSliderValence(value/100)} }
-                    
+                    dataIndex={props.emotion*1000}
+                    onChange={ value => {props.setSliderValence(value/1000)} }   
                 >
                     <EmojiIcon x="9" y="9" width="18px" height="18px" />
                 </CircularSlider>

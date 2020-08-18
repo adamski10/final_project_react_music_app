@@ -1,11 +1,29 @@
 import React from 'react'
+import Track from "./Track"
 
 const PlayList = (props) => {
 
-  return (
+  if (props.tracks !=null ) {
+    const trackNodes = props.tracks.map(track => {
+      return (
+        <Track
+          key={track.id} 
+          title={track.name}
+          album={track.album.name}
+          artist={track.artists[0].name}
+          image={track.album.images[2].url}
+        />
+      )
+    })
 
-      <h2>I'm a playList</h2>
-  )
+    return (
+      <ul>
+        { trackNodes }
+      </ul>
+    )
+  } return null;
+
+
 
 }
 
