@@ -9,14 +9,12 @@ class Spicify extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            valence: null,
             tracks: null,
             userSongs: [],
             loggedIn: false,
             valence: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
             danciness: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
             energy: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
-            tracks: null,
             emotionApiResponse: {}
         }
         this.setEmotion = this.setEmotion.bind(this)
@@ -55,11 +53,9 @@ class Spicify extends Component {
     filterTracksBasedOnMood() {
 
         const mood = {
-            valence: 0.5,
-            danceability: 0.4,
-            energy: 0.9,
-            acousticness: 0.0,
-            instrumentalness: 0.0
+            valence: this.state.valence,
+            danceability: this.state.danciness,
+            energy: this.state.energy
         };
 
         this.setState( { tracks: this.state.userSongs.filter(song => {
