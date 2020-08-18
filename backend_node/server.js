@@ -104,11 +104,6 @@ app.get('/', (req, res) => {
   }
 })
 
-app.get('/:id', (req, res) => {
-  const token = req.params.id;
-  res.json(token);
-})
-
 const convertPromisesToOne = (promises) => {
   return Promise.all(promises)
 }
@@ -143,11 +138,6 @@ app.get('/songs', (req,res) => {
     res.status(400).send(err)
   }
 });
-
-app.get('/:id', (req, res) => {
-    const token = req.params.id;
-    res.json(token);
-})
 
 app.get("/refresh_token", (req, res) => {
   spotifyApi.refreshAccessToken().then(
@@ -226,6 +216,11 @@ app.post('/upload', async (req, result) => {
 
   callCognitiveApi(buffer);
   
+})
+
+app.get('/:id', (req, res) => {
+  const token = req.params.id;
+  res.json(token);
 })
 
 app.listen(port, () => {
