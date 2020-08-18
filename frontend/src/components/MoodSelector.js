@@ -25,11 +25,10 @@ const MoodSelector = (props) => {
                     trackSize={24}
                     hideLabelValue="true"
                     min={0}
-                    max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
+                    max={1000} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
                     data= {[]}    
-                    dataIndex={props.emotion*100}
-                    onChange={ value => {props.setSliderValence(value/100)} }
-                    
+                    dataIndex={props.emotion*1000}
+                    onChange={ value => {props.setSliderValence(value/1000)} }   
                 >
                     <EmojiIcon x="9" y="9" width="18px" height="18px" />
                 </CircularSlider>
@@ -40,9 +39,9 @@ const MoodSelector = (props) => {
                     <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="slide-bars"  id ="energy" type="range" min="0" max="100" ></input>
                     <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="100" ></input>
                     <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
-                    <label for="energy">Energy</label>  
-                    <label for="dance-mood">Dance mood</label>
-                    <label for="energy">?????</label>
+                    <label htmlFor="energy">Energy</label>  
+                    <label htmlFor="dance-mood">Dance mood</label>
+                    <label htmlFor="energy">?????</label>
                 </div>
                 <h1>Hello from mood selector</h1>
             

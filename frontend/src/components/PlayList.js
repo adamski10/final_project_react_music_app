@@ -6,11 +6,12 @@ const PlayList = (props) => {
   if (props.tracks !=null ) {
     const trackNodes = props.tracks.map(track => {
       return (
-        <Track 
+        <Track
+          key={track.id} 
           title={track.name}
           album={track.album.name}
           artist={track.artists[0].name}
-          image={track.album.images[2]}
+          image={track.album.images[2].url}
         />
       )
     })

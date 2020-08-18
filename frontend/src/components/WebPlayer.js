@@ -10,7 +10,8 @@ class SpotifyWebPlayer extends Component {
             playerResume: null,
             playerPause: null,
             device_id: null,
-            volume: null
+            volume: null,
+            trackUris: null
         }
         this.handleScriptError = this.handleScriptError.bind(this);
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
@@ -20,6 +21,12 @@ class SpotifyWebPlayer extends Component {
         this.resumePlayback = this.resumePlayback.bind(this);
         this.pausePlayback = this.pausePlayback.bind(this);
         this.startPlayback = this.startPlayback.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.tracks != this.props.tracks) {
+            this.setState( { trackUris: this.props.tracks.map(track => track.uri)})
+        }
     }
 
     handleScriptError() {
@@ -93,7 +100,7 @@ class SpotifyWebPlayer extends Component {
                 "Authorization": `Bearer ${this.props.accessToken}`
             },
             body: JSON.stringify({
-                "uris": ["spotify:track:43LrnQSfEZULp0nRhOqdU3", "spotify:track:5uEnSz3GJbQeI1bEhvzKyb", "spotify:track:0cJZTQ1x6ko3gbtoLKaoQe", "spotify:track:1ZUsnvMUqF0uJkhhjZlvcY"]
+                "uris": this.state.trackUris
             })
         })
         this.setState({
@@ -123,7 +130,7 @@ class SpotifyWebPlayer extends Component {
                 </button>
                 <button onClick={this.setNextTrack}>Next</button>
                 <button onClick={this.startPlayback}>HIT ME BABY ONE MORE TIME</button>
-                <label for="volume-slider">Set Volume</label>
+                <label htmlFor="volume-slider">Set Volume</label>
                 <input 
                     type="range" 
                     id="volume-slider" 
