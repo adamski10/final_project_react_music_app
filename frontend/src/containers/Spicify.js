@@ -27,6 +27,23 @@ class Spicify extends Component {
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
     }
 
+    
+
+    convertEmotionToValance = () =>{
+        
+        const negative=["anger", "contempt", "disgust", "fear"]
+        const positive=["happiness"]
+        let valence=0.5
+        for (const [key, value] of Object.entries(this.state.emotionApiResponse)) {
+            if (negative.includes(key)){
+                valence -= value/2
+            } else if (positive.includes(key)){
+                valence += value/2
+            }
+          }
+        this.setSliderValence(valence)
+    }
+
     getHashParams() {
         let hashParams = {};
         let e, r = /([^&;=]+)=?([^&;]*)/g,
@@ -83,6 +100,7 @@ class Spicify extends Component {
 
     setEmotion(value){
         this.setState({emotionApiResponse: value})
+        this.convertEmotionToValance()
     }
     setSliderValence(value){
         this.setState({valence: value})
@@ -108,10 +126,10 @@ class Spicify extends Component {
                         handleSetTracks={this.filterTracksBasedOnMood}    
                         handleLoggedIn={this.changeLoggedIn}
                         setSliderValence={this.setSliderValence} 
-                                    setSliderDanciness={this.setSliderDanciness}
-                                    setSliderEnergy={this.setSliderEnergy}
-                                    setEmotion={this.setEmotion} 
-                                    emotion={this.state.emotionApiResponse.happiness}
+                        setSliderDanciness={this.setSliderDanciness}
+                        setSliderEnergy={this.setSliderEnergy}
+                        setEmotion={this.setEmotion} 
+                        emotion={this.state.valence}
                         />} 
                     />
                 </>            
