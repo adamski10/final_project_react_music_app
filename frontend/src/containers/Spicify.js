@@ -57,12 +57,30 @@ class Spicify extends Component {
 
     checkIfSongIsWithinRange(song, mood) {
         const delta = 0.1;
-        const moodKeys = Object.keys(mood);
-        for (const key of moodKeys) {
+        for (const key in mood) {
             if (song[key] <= (mood[key] += delta) && song[key] >= (mood[key] -= delta)) {
                 return true
             }
         }
+    }
+
+    getFullTrackDetails(songs) {
+        const url = "http://localhost:8080/songs/"
+
+        const songPromises = songs.map((song) => {
+            return fetch(url + song.id).then(res => res.json())
+        })
+
+        Promise.all(songPromises)
+        .then((results) => {
+            const uniqueSongs = Array.from(new Set(results.map(song => song.id)))
+            .map(id => {
+                return results.find(songs => songs.id === id )
+            })
+            this.setState({
+                tracks: uniqueSongs
+            })
+        })
     }
 
     filterTracksBasedOnMood() {
@@ -73,12 +91,13 @@ class Spicify extends Component {
             energy: this.state.energy
         };
 
-        this.setState( { tracks: this.state.userSongs.filter(song => {
+        const filteredSongs = this.state.userSongs.filter(song => {
             if (this.checkIfSongIsWithinRange(song, mood)) {
                 return song
             }
-        })})
-            
+        })
+
+        this.getFullTrackDetails(filteredSongs)    
     }
 
     setEmotion(value){
