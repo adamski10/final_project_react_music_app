@@ -46,11 +46,11 @@ const MoodSelector = (props) => {
                     label="Mood selector"
                     labelColor="#005a58"
                     knobColor="#005a58"
-                    progressColorFrom="#00bfbd"
-                    progressColorTo="#009c9a"
+                    progressColorFrom="#FFADB2"
+                    progressColorTo="#FF8F9E"
                     progressSize={15}
-                    trackColor="#eeeeee"
-                    trackSize={24}
+                    trackColor="#F5C6F5"
+                    trackSize={15}
                     hideLabelValue="true"
                     min={0}
                     max={1000} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
@@ -63,19 +63,17 @@ const MoodSelector = (props) => {
                 <div className="webcam">
                     <WebcamCapture setEmotion={props.setEmotion}/>
                 </div>
-                <div className="slide-bars-container1">
-                    <h4>Energy</h4>
+                <div className="slide-bars-container">
+                    <div className="bar-energy">Energy</div>
                     <div className="range-wrap">
-                        {/* <label for="energy">Energy</label>   */}
                         <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="range"  type="range" min="0" max="100" ></input> 
                         <output class="bubble"></output>
                     </div>
                         
                 </div>
-                <div className="slide-bars-container1">
-                    <h4>Dancebility</h4>
+                <div className="slide-bars-container">
+                    <div className="bar-dance">Dancebility</div>
                     <div className="range-wrap">
-                        {/* <label for="dance-mood">Dance mood</label> */}
                         <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="range"  type="range" min="0" max="100" ></input>
                         <output class="bubble"></output>
                     </div>

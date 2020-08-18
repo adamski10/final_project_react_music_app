@@ -6,9 +6,14 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
 }
+@font-face {
+  font-family: "CustomFont";
+  src: url('./Fonts/museomoderno-variablefont_wght-webfont.woff');
+}
 
 html {
   background: linear-gradient(135deg, rgb(40, 48, 76), rgb(50, 60, 92));
+  background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg');
 }
 
 code {
@@ -33,43 +38,41 @@ code {
     inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
 }
 
-.slide-bars-container1 {
-  border-radius: 1%;
-  background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: left;
-  width: 50%;
-  max-width: 800px;
-  margin: 0 auto;
-  margin-top: 1%;
-  padding: 1px;
-  box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
-    inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
-    inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
-}
-
-.slide-bars-container1 > h4 {
-  color: white;
-  transform: translateY(90%);
-} 
-/* 
-.slide-bars-container2 {
-  border-radius: 10%;
+.slide-bars-container {
+  border-radius: 5%/20%;
   background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  width: 60%;
+  height: 80%;
   max-width: 800px;
   margin: 0 auto;
   margin-top: 1%;
-  padding: 10px;
+  padding: 30px;
   box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
     inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
     inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
-} */
+}
+
+.bar-energy {
+  color: white;
+  transform: translateX(80%);
+  margin-right: auto;
+  /* text-shadow: -7px -6px 6px rgba(0,0,0,0.32); */
+  -webkit-transform: scale(1.1) translate(40px,-2px);
+  font-family: 'CustomFont';
+}
+
+
+.bar-dance {
+  color: white;
+  margin-right: auto;
+  /* text-shadow: -7px -6px 6px rgb(255, 248, 248); */
+  -webkit-transform: scale(1.1) translate(40px,-2px);
+  font-family: 'CustomFont';
+}
 
 .webcam{
     width: 250px;
@@ -81,7 +84,7 @@ code {
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translateY(-57%); /* 35 previously before adding slidebars*/
+    transform: translateY(-64%); /* 35 previously before adding slidebars*/
     z-index: 2;    
 } 
 
@@ -121,11 +124,12 @@ video {
   position: absolute;
   border-radius: 4px;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-56%);
   transition: height 100ms ease;
   box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
     inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
     inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
+    
 }
 
 .range-wrap:hover::before {
@@ -147,7 +151,7 @@ video {
   width: 2rem;
   height: 3rem;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(-56%);
   pointer-events: none; /* Remove pointer events on Bubble so user can click on the actual thumb beaneath it!  */
   color: transparent;
   display: grid;
