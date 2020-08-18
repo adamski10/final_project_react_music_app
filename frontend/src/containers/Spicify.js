@@ -55,6 +55,21 @@ class Spicify extends Component {
         }
     };
 
+    getFullTrackDetails(songs) {
+        const url = "http://localhost:8080/songs/"
+
+        const songPromises = songs.map((song) => {
+            return fetch(url + song.id).then(res => res.json())
+        })
+
+        Promise.all(songPromises)
+        .then((results) => {
+            this.setState({
+                tracks: results
+            })
+        })
+    }
+
     checkIfSongIsWithinRange(song, mood) {
         const delta = 0.1;
         const moodKeys = Object.keys(mood);
@@ -63,7 +78,7 @@ class Spicify extends Component {
                 return true
             }
         }
-    }
+    };
 
     filterTracksBasedOnMood() {
 
@@ -73,11 +88,13 @@ class Spicify extends Component {
             energy: this.state.energy
         };
 
-        this.setState( { tracks: this.state.userSongs.filter(song => {
+        const filteredSongs = this.state.userSongs.filter(song => {
             if (this.checkIfSongIsWithinRange(song, mood)) {
                 return song
             }
-        })})
+        })
+
+        this.getFullTrackDetails(filteredSongs)
             
     }
 
