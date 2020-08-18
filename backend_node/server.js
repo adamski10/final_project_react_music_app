@@ -139,6 +139,18 @@ app.get('/songs', (req,res) => {
   }
 });
 
+app.get("/songs/:id", (req, res) => {
+
+  try {
+    const id = req.params.id
+    spotifyApi.getTrack(id)
+    .then(trackDetails => res.json(trackDetails.body))
+  } catch (err) {
+    res.status(400).send(err)
+  }
+
+})
+
 app.get("/refresh_token", (req, res) => {
   spotifyApi.refreshAccessToken().then(
     function(data) {
