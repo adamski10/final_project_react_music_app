@@ -27,7 +27,7 @@ const MoodSelector = (props) => {
                     min={0}
                     max={100} // the slider reacts to emotion change with min=0 and max=1 but start point is not correct
                     data= {[]}    
-                    dataIndex={sliderValance*100}
+                    dataIndex={props.emotion*100}
                     onChange={ value => {props.setSliderValence(value/100)} }
                     
                 >
@@ -37,12 +37,12 @@ const MoodSelector = (props) => {
                     <WebcamCapture setEmotion={props.setEmotion}/>
                 </div>
                 <div className="slide-bars-container"> 
+                    <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="slide-bars"  id ="energy" type="range" min="0" max="100" ></input>
+                    <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="100" ></input>
+                    <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
                     <label for="energy">Energy</label>  
-                        <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="slide-bars"  id ="energy" type="range" min="0" max="100" ></input>
                     <label for="dance-mood">Dance mood</label>
-                        <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="slide-bars"  id ="dance-mood"type="range" min="0" max="100" ></input>
                     <label for="energy">?????</label>
-                        <input className="slide-bars" id="?????" type="range" min="0" max="1" ></input>
                 </div>
                 <h1>Hello from mood selector</h1>
             
