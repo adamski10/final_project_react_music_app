@@ -17,7 +17,8 @@ class Spicify extends Component {
             valence: 0.4, //the 0.5 is just a random default value for when the page loads, feel free to change
             danciness: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
             energy: 0.9, //the 0.5 is just a random default value for when the page loads, feel free to change
-            emotionApiResponse: {}
+            emotionApiResponse: {},
+            selectedSongUri: null
         }
         this.setEmotion = this.setEmotion.bind(this)
         this.setSliderValence = this.setSliderValence.bind(this)
@@ -27,7 +28,11 @@ class Spicify extends Component {
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
     }
 
-    
+    handleSongUriContext(selectedUri) {
+        this.setState({
+            selectedSongUri: selectedUri
+        })
+    }
 
     convertEmotionToValance = () =>{
         

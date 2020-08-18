@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Script from 'react-load-script';
+import Track from './Track';
 
 class SpotifyWebPlayer extends Component {
 
@@ -100,7 +101,7 @@ class SpotifyWebPlayer extends Component {
                 "Authorization": `Bearer ${this.props.accessToken}`
             },
             body: JSON.stringify({
-                "uris": this.state.trackUris
+                "uris": this.props.tracks.map(track => track.uri)
             })
         })
         this.setState({
@@ -126,10 +127,10 @@ class SpotifyWebPlayer extends Component {
                           this.resumePlayback()
                     }
                 }}>
-                    {this.state.playerPause ? "CAUSE I'M HAVING A GOOD TIME" : "DON'T STOP ME NOW"}
+                    {this.state.playerPause ? "RESUME" : "PAUSE"}
                 </button>
                 <button onClick={this.setNextTrack}>Next</button>
-                <button onClick={this.startPlayback}>HIT ME BABY ONE MORE TIME</button>
+                <button onClick={this.startPlayback}>PLAY</button>
                 <label htmlFor="volume-slider">Set Volume</label>
                 <input 
                     type="range" 
