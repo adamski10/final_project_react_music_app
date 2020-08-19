@@ -6,7 +6,7 @@ import PlayBar from './PlayBar.js';
 import PlayList from './PlayList.js';
 import SpotifyWebPlayer from './WebPlayer';
 import mygif2003 from '../Images/coffee.gif'
-import Song from '../Music/song.mpeg'
+// import Song from '../Music/song.mpeg'
 
 class Home extends Component {
 
