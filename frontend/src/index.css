@@ -179,7 +179,7 @@ video {
 .range-wrap:hover .bubble,
 .range-wrap:focus .bubble {
   color: black;
-  transform: translateY(-50%) scale(1.5);
+  transform: translateY(-56%) scale(1.1);
   padding: 0.1em;
 }
 
