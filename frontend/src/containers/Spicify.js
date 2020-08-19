@@ -8,9 +8,11 @@ class Spicify extends Component {
     constructor(props) {
         super(props);
         const params = this.getHashParams();
+        console.log(params.access_token)
         this.state = {
             tracks: null,
             userToken: params.access_token,
+            userId: null,
             userSongs: [],
             loggedIn: false,
             valence: 0.4, //the 0.5 is just a random default value for when the page loads, feel free to change
@@ -26,6 +28,25 @@ class Spicify extends Component {
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
         this.handleSongUriContext = this.handleSongUriContext.bind(this);
+    }
+
+    componentDidMount() {
+        console.log("COMPONENT MOUNTED IN CONTAINER: ", this.state.userToken)
+        fetch("https://api.spotify.com/v1/me", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${this.state.userToken}`
+            }
+        })
+        .then(res => res.json())
+        .then(userData => {
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    userId: userData.id
+                }
+            }, () => console.log("User Id fetched: ", this.state.userId))
+        })
     }
 
     handleSongUriContext(selectedUri) {
@@ -171,6 +192,7 @@ class Spicify extends Component {
                         setEmotion={this.setEmotion}
                         handleSelectedSongUri={this.handleSongUriContext}
                         emotion={this.state.valence}
+                        userId={this.state.userId}
                         />} 
                     />
                 </>            

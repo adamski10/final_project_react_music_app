@@ -168,6 +168,27 @@ app.get("/refresh_token", (req, res) => {
   );
 })
 
+app.post('/new_playlist', (req, res) => {
+  console.log(req.query.name)
+  console.log(req.body.name)
+  spotifyApi.setAccessToken(access_token);
+  spotifyApi.setRefreshToken(refresh_token);
+  spotifyApi.createPlaylist("Test", { 'public' : true })
+  .then((data) => {
+    console.log('created playlist', data.body)
+  },
+  function(err) {
+    console.log('Could not refresh access token', err);
+  })
+  // spotifyApi.createPlaylist(req.params.id, {'public': true})
+  // .then((data) => {
+  //   console.log('created playlist', data.body)
+  // },
+  // function(err) {
+  //   console.log('Could not refresh access token', err);
+  // })
+})
+
 app.post('/upload', async (req, result) => {
   const  {postData}  = req.body;
   

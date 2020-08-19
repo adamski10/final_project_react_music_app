@@ -38,7 +38,7 @@ class Home extends Component {
                     accessToken={this.props.accessToken}
                     tracks={this.props.tracks}
                 />
-                <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
+                <PlayList userId={this.props.userId} accessToken={this.props.accessToken} handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
             </div>
         )
         }
