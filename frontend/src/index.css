@@ -13,7 +13,7 @@ body {
 
 html {
   background: linear-gradient(135deg, rgb(40, 48, 76), rgb(50, 60, 92));
-  background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg');
+  /* background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg'); */
 }
 
 code {
@@ -37,6 +37,7 @@ code {
     inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
     inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
 }
+
 
 .slide-bars-container {
   border-radius: 5%/20%;
@@ -84,13 +85,26 @@ code {
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translateY(-64%); /* 35 previously before adding slidebars*/
+    transform: translateY(6%); /* 35 previously before adding slidebars*/
     z-index: 2;    
 } 
 
+.webcam_slider_container {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 5vh
+  
+}
+
 .capture-button{
   position: absolute;
-  transform: translateY(-500%);
+  transform: translateY(280%);
+  height: 34px;
+  width: auto;
+  cursor: pointer;
 }
 
 video {
@@ -169,15 +183,11 @@ video {
   padding: 0.1em;
 }
 
+.secret:hover  {
+  display: block;
+  opacity: 1;
+ }
 
-
-
-
-
-svg {
-  
-}
-
-
-
-
+ .secret {
+   opacity: 0;
+ }

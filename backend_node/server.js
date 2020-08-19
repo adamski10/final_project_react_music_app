@@ -157,11 +157,6 @@ app.get("/new_playlist/:playlist", (req, res) => {
 
 app.post("/add_to_playlist/:playlistId", (req, res) => {
   const playlistId = req.params.playlistId
-  // const trackUriObject = {
-  //   "uris": trackUris
-  // }
-  console.log(playlistId);
-  console.log(req.body);
 
   spotifyApi.addTracksToPlaylist(playlistId, req.body.trackUris)
 

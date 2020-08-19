@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import MoodSelector from './MoodSelector';
-import Logo from './Logo.js'
-import MoodTracker from './MoodTracker.js'
-import PlayBar from './PlayBar.js'
-import PlayList from './PlayList.js'
+import Logo from './Logo.js';
+import MoodTracker from './MoodTracker.js';
+import PlayBar from './PlayBar.js';
+import PlayList from './PlayList.js';
+import SpotifyWebPlayer from './WebPlayer';
+import mygif2003 from '../Images/coffee.gif'
 
 class Home extends Component {
 
@@ -32,8 +34,17 @@ class Home extends Component {
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
                 <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
-                <PlayBar />
+                <SpotifyWebPlayer
+                    selectedSongUri={this.props.selectedSongUri}
+                    accessToken={this.props.accessToken}
+                    tracks={this.props.tracks}
+                />
                 <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
+                <div className="secret">
+                    <div id="hovershow1" className='coffee_gif'>
+                    { <img src={mygif2003}/> }
+                    </div>
+                </div>
             </div>
         )
         }

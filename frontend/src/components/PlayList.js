@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Track from "./Track";
 import SavePlaylist from "./SavePlaylist";
+import "./Track.css";
 
 
 class PlayList extends Component {
@@ -47,12 +48,7 @@ class PlayList extends Component {
         this.saveTracksToPlaylist()
       })
     })
-    // .then(() => {
-      // const trackUris = this.props.tracks.map(track => track.uri)
-      // fetch(`http://localhost:8080/add_to_playlist/${this.state.newPlaylist.body.id}/${trackUris}`)
-      // .then(res => res.json())
-      // .then(tracks => console.log("Success!"))
-    // })
+
   }
 
   render() {
@@ -78,7 +74,7 @@ class PlayList extends Component {
           handleSave={this.updateSave}
           handleClickSave={this.handleSavePlaylist}
           />
-          <ul>
+          <ul className="tracks-container">
             { trackNodes }
           </ul>
         </>
