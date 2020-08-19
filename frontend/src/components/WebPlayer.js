@@ -7,6 +7,7 @@ class SpotifyWebPlayer extends Component {
         super(props)
         this.state = {
             webPlayer: null,
+            playerInitialise: null,
             playerResume: null,
             playerPause: null,
             device_id: null,
@@ -43,7 +44,7 @@ class SpotifyWebPlayer extends Component {
     }
 
     handleScriptError() {
-        console.log("SPICY. SPOTIFY SDK SCRIPT LOAD ERROR.")
+        console.log("SPOTIFY SDK SCRIPT LOAD ERROR.")
     }
 
     handleScriptLoad() {
@@ -100,18 +101,28 @@ class SpotifyWebPlayer extends Component {
     resumePlayback() {
         this.state.webPlayer.resume()
         .then(() => {
-            this.setState({
-                playerPause: false
-            })
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    playerInitialise: true,
+                    playerResume: true,
+                    playerPause: false
+                }
+            }, () => console.log("Player resumed"))
         })
     }
 
     pausePlayback() {
         this.state.webPlayer.pause()
         .then(() => {
-            this.setState({
-                playerPause: true
-            })
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    playerInitialise: true,
+                    playerResume: false,
+                    playerPause: true
+                }
+            }, () => console.log("Player paused"))
         })
     }
 
@@ -127,9 +138,14 @@ class SpotifyWebPlayer extends Component {
                 "offset": this.handleSelectedContextUri()
             })
         })
-        this.setState({
-            playerPause: false
-        })
+        this.setState((prevState) => {
+            return {
+                ...prevState,
+                playerInitialise: true,
+                playerResume: true,
+                playerPause: false
+            }
+        }, () => console.log("Player initialised"))
     }
 
     render() {
@@ -143,17 +159,19 @@ class SpotifyWebPlayer extends Component {
                 </Script>
                 <button onClick={this.setPreviousTrack}>Previous</button>
                 <button onClick={() => {
-                    if (!this.state.playerPause) {
-                        this.pausePlayback()
+                    if (!this.state.playerInitialise) {
+                        this.startPlayback()
+                    }
+                    else if (this.state.playerPause && this.state.playerInitialise) {
+                        this.resumePlayback()
                     }
                     else {
-                          this.resumePlayback()
+                          this.pausePlayback()
                     }
                 }}>
                     {this.state.playerPause ? "RESUME" : "PAUSE"}
                 </button>
                 <button onClick={this.setNextTrack}>Next</button>
-                <button onClick={this.startPlayback}>PLAY</button>
                 <label htmlFor="volume-slider">Set Volume</label>
                 <input 
                     type="range" 
