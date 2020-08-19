@@ -13,7 +13,7 @@ class Home extends Component {
     constructor(props) {
         super(props);
         this.handleGeneratePlaylist = this.handleGeneratePlaylist.bind(this)
-        this.play = this.play.bind(this)
+        // this.play = this.play.bind(this)
     }
 
     componentDidMount() {
@@ -24,10 +24,10 @@ class Home extends Component {
         this.props.handleSetTracks();
     }
 
-    play() {
-        const song = new Audio(Song)
-        song.play()
-    }
+    // play() {
+    //     const song = new Audio(Song)
+    //     song.play()
+    // }
 
     
 
