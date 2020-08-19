@@ -62,7 +62,7 @@ code {
   transform: translateX(80%);
   margin-right: auto;
   /* text-shadow: -7px -6px 6px rgba(0,0,0,0.32); */
-  -webkit-transform: scale(1.1) translate(40px,-2px);
+  -webkit-transform: scale(1.1) translate(40px,-3px);
   font-family: 'CustomFont';
 }
 
@@ -71,7 +71,7 @@ code {
   color: white;
   margin-right: auto;
   /* text-shadow: -7px -6px 6px rgb(255, 248, 248); */
-  -webkit-transform: scale(1.1) translate(40px,-2px);
+  -webkit-transform: scale(1.1) translate(40px,-3px);
   font-family: 'CustomFont';
 }
 

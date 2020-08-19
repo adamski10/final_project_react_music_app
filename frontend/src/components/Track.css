@@ -19,7 +19,7 @@
     border-radius: 30px;
     background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
     box-sizing: border-box;
-    max-height: 80px;
+    max-height: 60px;
     margin: 10px;
     /* grid-template-columns: 1fr 1fr 5fr 3fr; */
     /* max-width: 800px;
@@ -59,6 +59,7 @@
     font-family: "CustomFont";
     color: rgb(214, 213, 213);
     margin: 8px;
+    width: 40%;
 }
 
 .track-play-wrapper {
