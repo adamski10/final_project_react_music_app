@@ -29,12 +29,6 @@ class Spicify extends Component {
         this.handleSongUriContext = this.handleSongUriContext.bind(this);
     }
 
-    // async handleSongUriContext(selectedUri) {
-    //     console.log("I'M CALLED", selectedUri)
-    //     await this.setState({ selectedSongUri: selectedUri })
-    //     console.log(this.state.selectedSongUri)
-    // }
-
     handleSongUriContext(selectedUri) {
         console.log("I'M CALLED", selectedUri)
         this.setState(prevState => { 
@@ -50,7 +44,7 @@ class Spicify extends Component {
 
     convertEmotionToValance = () =>{
         
-        const negative=["anger", "contempt", "disgust", "fear"]
+        const negative=["anger", "contempt", "disgust", "fear", "sadness"]
         const positive=["happiness"]
         let valence=0.5
         for (const [key, value] of Object.entries(this.state.emotionApiResponse)) {
