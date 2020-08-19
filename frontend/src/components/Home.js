@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import MoodSelector from './MoodSelector';
-import Logo from './Logo.js'
-import MoodTracker from './MoodTracker.js'
-import PlayBar from './PlayBar.js'
-import PlayList from './PlayList.js'
+import Logo from './Logo.js';
+import MoodTracker from './MoodTracker.js';
+import PlayBar from './PlayBar.js';
+import PlayList from './PlayList.js';
+import SpotifyWebPlayer from './WebPlayer';
 
 class Home extends Component {
 
@@ -32,8 +33,12 @@ class Home extends Component {
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
                 <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
-                <PlayBar />
-                <PlayList tracks={this.props.tracks}/>
+                <SpotifyWebPlayer
+                    selectedSongUri={this.props.selectedSongUri}
+                    accessToken={this.props.accessToken}
+                    tracks={this.props.tracks}
+                />
+                <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
             </div>
         )
         }

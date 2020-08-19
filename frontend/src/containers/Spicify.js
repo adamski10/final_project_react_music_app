@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Home from '../components/Home';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyWebPlayer from '../components/WebPlayer';
 import Login from "../components/Login";
 
 class Spicify extends Component {
@@ -17,7 +16,8 @@ class Spicify extends Component {
             valence: 0.4, //the 0.5 is just a random default value for when the page loads, feel free to change
             danciness: 0.5, //the 0.5 is just a random default value for when the page loads, feel free to change
             energy: 0.9, //the 0.5 is just a random default value for when the page loads, feel free to change
-            emotionApiResponse: {}
+            emotionApiResponse: {},
+            selectedSongUri: null
         }
         this.setEmotion = this.setEmotion.bind(this)
         this.setSliderValence = this.setSliderValence.bind(this)
@@ -25,9 +25,19 @@ class Spicify extends Component {
         this.setSliderEnergy = this.setSliderEnergy.bind(this)
         this.changeLoggedIn = this.changeLoggedIn.bind(this);
         this.filterTracksBasedOnMood = this.filterTracksBasedOnMood.bind(this);
+        this.handleSongUriContext = this.handleSongUriContext.bind(this);
     }
 
-    
+    handleSongUriContext(selectedUri) {
+        this.setState(prevState => { 
+           return {
+            ...prevState,
+            selectedSongUri: selectedUri
+           } 
+        }, () => {
+            console.log(this.state.selectedSongUri)
+        }) 
+    }
 
     convertEmotionToValance = () =>{
         
@@ -146,22 +156,20 @@ class Spicify extends Component {
         return (
             <Router>
                 <>
-                    <SpotifyWebPlayer 
-                        accessToken={this.state.userToken}
-                        tracks={this.state.tracks}
-                        >    
-                    </SpotifyWebPlayer>
                     <Route exact path="/" component={Login}/>
                     <Route 
                         path="/spicify"
-                        render={() => <Home 
+                        render={() => <Home
+                        selectedSongUri={this.state.selectedSongUri}
+                        accessToken={this.state.userToken}
                         tracks={this.state.tracks}    
                         handleSetTracks={this.filterTracksBasedOnMood}    
                         handleLoggedIn={this.changeLoggedIn}
                         setSliderValence={this.setSliderValence} 
                         setSliderDanciness={this.setSliderDanciness}
                         setSliderEnergy={this.setSliderEnergy}
-                        setEmotion={this.setEmotion} 
+                        setEmotion={this.setEmotion}
+                        handleSelectedSongUri={this.handleSongUriContext}
                         emotion={this.state.valence}
                         />} 
                     />
