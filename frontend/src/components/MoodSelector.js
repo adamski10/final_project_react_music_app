@@ -67,7 +67,7 @@ const MoodSelector = (props) => {
                     <div className="bar-energy">Energy</div>
                     <div className="range-wrap">
                         <input onChange={event => {props.setSliderEnergy(event.target.value/100)}} className="range"  type="range" min="0" max="100" ></input> 
-                        <output class="bubble"></output>
+                        <output className="bubble"></output>
                     </div>
                         
                 </div>
@@ -75,7 +75,7 @@ const MoodSelector = (props) => {
                     <div className="bar-dance">Dancebility</div>
                     <div className="range-wrap">
                         <input onChange={event => {props.setSliderDanciness(event.target.value/100)}} className="range"  type="range" min="0" max="100" ></input>
-                        <output class="bubble"></output>
+                        <output className="bubble"></output>
                     </div>
                 </div>
                     
