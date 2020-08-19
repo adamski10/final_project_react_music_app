@@ -5,7 +5,8 @@ import MoodTracker from './MoodTracker.js';
 import PlayBar from './PlayBar.js';
 import PlayList from './PlayList.js';
 import SpotifyWebPlayer from './WebPlayer';
-import mygif2003 from '../Images/coffee.gif'
+import mygif2003 from '../Images/coffee.gif';
+import "./Home.css"
 
 class Home extends Component {
 
@@ -33,7 +34,9 @@ class Home extends Component {
                 setSliderDanciness={this.props.setSliderDanciness}
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
-                <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
+                <div className="button-wrap">
+                    <button className="generate-button" onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
+                </div>
                 <SpotifyWebPlayer
                     selectedSongUri={this.props.selectedSongUri}
                     accessToken={this.props.accessToken}
