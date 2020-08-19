@@ -43,8 +43,7 @@ const spotifyApi = new SpotifyWebApi({
     redirectUri: "http://localhost:8080/"
 });
 
-const scope = ["user-library-read user-follow-modify user-read-recently-played app-remote-control user-follow-read playlist-read-private user-read-currently-playing\
- user-read-playback-position user-top-read user-library-modify playlist-modify-public user-modify-playback-state playlist-read-collaborative user-read-private user-read-email playlist-modify-private ugc-image-upload user-read-playback-state streaming"]
+const scope = ["user-library-read user-follow-modify user-read-recently-played app-remote-control user-follow-read playlist-read-private user-read-currently-playing user-read-playback-position user-top-read user-library-modify playlist-modify-public user-modify-playback-state playlist-read-collaborative user-read-private user-read-email playlist-modify-private ugc-image-upload user-read-playback-state streaming"]
 
 // const authorizeURL = spotifyApi.createAuthorizeURL(scope);
 
@@ -141,6 +140,42 @@ app.get('/songs', (req,res) => {
     res.status(400).send(err)
   }
 });
+
+app.get("/new_playlist/:playlist", (req, res) => {
+  
+    const playlistName = req.params.playlist
+    spotifyApi.getMe()
+    .then(user => spotifyApi.createPlaylist(user.body.id, playlistName))
+    .then(playlist => res.json(playlist))
+    .catch((error) => {
+      res.status(400)
+      res.json(error)
+    })
+    }, function(err) {
+      console.log('Something went wrong!', err);
+});
+
+app.post("/add_to_playlist/:playlistId", (req, res) => {
+  const playlistId = req.params.playlistId
+  // const trackUriObject = {
+  //   "uris": trackUris
+  // }
+  console.log(playlistId);
+  console.log(req.body);
+
+  spotifyApi.addTracksToPlaylist(playlistId, req.body.trackUris)
+
+  .then(tracks => res.json(tracks))
+  .catch((error) => {
+    res.status(400)
+    res.json(error)
+  })
+  , function(err) {
+    console.log('Something went wrong!', err);
+  }
+});
+
+
 
 app.get("/songs/:id", (req, res) => {
 
