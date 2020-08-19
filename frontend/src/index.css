@@ -85,13 +85,26 @@ code {
     align-items: center;
     justify-content: center;
     position: absolute;
-    transform: translateY(-64%); /* 35 previously before adding slidebars*/
+    transform: translateY(6%); /* 35 previously before adding slidebars*/
     z-index: 2;    
 } 
 
+.webcam_slider_container {
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-bottom: 5vh
+  
+}
+
 .capture-button{
   position: absolute;
-  transform: translateY(-500%);
+  transform: translateY(280%);
+  height: 34px;
+  width: auto;
+  cursor: pointer;
 }
 
 video {
@@ -175,9 +188,7 @@ video {
 
 
 
-svg {
-  
-}
+
 
 
 

@@ -1,7 +1,10 @@
-import React, {useRef, useState, useCallback} from "react";
+import React, {useRef, useState, useCallback, useEffect} from "react";
 import Webcam from "react-webcam";
 import axios from 'axios';
-import bnw_camera_icon from '../Images/bnw_camera_icon.svg'
+import refreshPhoto from '../Images/retake_photo.svg'
+import takePhoto from '../Images/yellow_camera.svg'
+import apertureOpen from '../Images/aperture_open.svg'
+import apertureClosed from '../Images/aperture_closed.svg'
 
 
 
@@ -13,6 +16,13 @@ const WebcamCapture = (props) => {
 
     // We create a useState instance and use object destructuring to create the variables 'imgSrc' and the method to set imgSrc (setImgSrc) 
     const [imgSrc, setImgSrc] = useState(null);
+
+    const [webCamLive, setwebCamLive] = useState(true);
+
+    const [captureButtonImage, setCaptureButtonImage] = useState(apertureClosed);
+    
+
+   
 
     
     const uploadImageToBackend = (postData) => {
@@ -34,7 +44,12 @@ const WebcamCapture = (props) => {
       uploadImageToBackend(imageSrc);
       //we split the imageSrc so we can just get at the image data, we're not interested in the metadata
       setImgSrc(imageSrc);
+      setwebCamLive(false)
     }, [webcamRef, setImgSrc]);
+
+    const refresh = () => {
+      setwebCamLive(true)
+    }
 
     const videoConstraints = {
       width: 1280,
@@ -44,25 +59,40 @@ const WebcamCapture = (props) => {
 
     return (
       <>
-        <Webcam
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          height= {420}
-          width= {420}
-          videoConstraints={videoConstraints}
-          mirrored={true}
-        />
-        
-        <button onClick={capture} className="capture-button">Capture photo</button>
-        
-        {imgSrc && (
-          <img
-            src={imgSrc}
-          />
+        {webCamLive && (
+          <>
+            <Webcam
+              audio={false}
+              ref={webcamRef}
+              screenshotFormat="image/jpeg"
+              height= {420}
+              width= {420}
+              videoConstraints={videoConstraints}
+              mirrored={true}
+            />
+            
+            <img src={captureButtonImage}
+                onClick={capture}
+                className="capture-button"
+                onMouseEnter={() => setCaptureButtonImage(apertureOpen)}
+                onMouseLeave={() =>setCaptureButtonImage(apertureClosed)}
+            />
+             
+                
+            
+          </>
+          )}
+        {/* <button onClick={refresh} className="capture-button">New Photo</button> */}
+        {!webCamLive && (
+          <>
+            <img src={imgSrc} />
+            <img src={refreshPhoto} onClick={refresh} className="capture-button"/>
+          </>
         )}
       </>
     );
   };
+
+
   
 export default WebcamCapture
