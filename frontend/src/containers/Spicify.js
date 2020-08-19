@@ -31,7 +31,7 @@ class Spicify extends Component {
 
     convertEmotionToValance = () =>{
         
-        const negative=["anger", "contempt", "disgust", "fear"]
+        const negative=["anger", "contempt", "sadness", "disgust", "fear"]
         const positive=["happiness"]
         let valence=0.5
         for (const [key, value] of Object.entries(this.state.emotionApiResponse)) {

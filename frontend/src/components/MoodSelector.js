@@ -3,13 +3,72 @@ import WebcamCapture from './Webcam';
 import CircularSlider from '@fseehawer/react-circular-slider';
 import { ReactComponent as EmojiIcon } from '../Images/smileyface.svg';
 
-const MoodSelector = (props) => {    
+import { ReactComponent as Emoji1f62d } from '../Images/svg_emojis/1f62d.svg'
+import { ReactComponent as Emoji1f622 } from '../Images/svg_emojis/1f622.svg'
+import { ReactComponent as Emoji1f61e } from '../Images/svg_emojis/1f61e.svg'
+import { ReactComponent as Emoji1f641 } from '../Images/svg_emojis/1f641.svg'
+import { ReactComponent as Emoji1f610 } from '../Images/svg_emojis/1f610.svg'
+import { ReactComponent as Emoji1f642 } from '../Images/svg_emojis/1f642.svg'
+import { ReactComponent as Emoji1f600 } from '../Images/svg_emojis/1f600.svg'
+import { ReactComponent as Emoji1f601 } from '../Images/svg_emojis/1f601.svg'
+import { ReactComponent as Emoji1f929 } from '../Images/svg_emojis/1f929.svg'
 
-    const [sliderValance, setSliderValance] = useState();
-    useEffect( () => { setSliderValance(props.emotion)}, [ props.emotion ] );
 
 
-    //it checks for the props.emotion changing and when it detects a change it calls usestate and passes in props.emotion
+
+
+const MoodSelector = (props, { emotion } = props) => {    
+
+    const [sliderEmoji, setSliderEmoji] = useState(<Emoji1f929 />);
+    useEffect( () => { changeEmoji()}, [ props.emotion ] );
+
+    useEffect(()=>{ console.log("i'm changed")},[sliderEmoji])
+
+    const changeEmoji = () =>{
+        switch (true) { //matches to any statement that is true
+            case (props.emotion < 0.11):
+                setSliderEmoji(<Emoji1f62d className="emoji"/>)
+                console.log("i'm under 0.11 😭 1f62d")
+                break;
+            case (props.emotion < 0.22):
+                console.log("i'm under 😢 1f622")
+                setSliderEmoji(<Emoji1f622 className="emoji"/>)
+                break;
+            case (props.emotion < 0.33):
+                console.log("i'm under 0.33 😞 1f61e")
+                setSliderEmoji(<Emoji1f61e className="emoji"/>)
+                break;
+            case (props.emotion < 0.44):
+                console.log("i'm under 0.44 🙁 1f641")
+                setSliderEmoji(<Emoji1f641 className="emoji"/>)
+                break;     
+            case (props.emotion < 0.55):
+                console.log("i'm under 0.55 😐 1f610")
+                setSliderEmoji(<Emoji1f610 style={{filter: "drop-shadow(30px 10px 4px #db4c28)"}}/>)
+                break;
+            case (props.emotion < 0.66):
+                console.log("i'm under 0.66 🙂 1f642")
+                setSliderEmoji(<Emoji1f642 className="emoji"/>)
+                break;
+            case (props.emotion < 0.77):
+                console.log("i'm under 0.77 😀 1f600")
+                setSliderEmoji(<Emoji1f600 className="emoji"/>)
+                break;
+            case (props.emotion < 0.88):
+                console.log("i'm under 0.88 😁 1f601")
+                setSliderEmoji(<Emoji1f601 className="emoji"/>)
+                break;
+            case (props.emotion <= 1):
+                console.log("i'm under 1 🤩 1f929")
+                setSliderEmoji(<Emoji1f929 className="emoji"/>)
+                break;
+            default:
+                console.log("i'm default")
+                break;
+        }
+
+    }
+
 
     return (
         <>
@@ -31,7 +90,8 @@ const MoodSelector = (props) => {
                     onChange={ value => {props.setSliderValence(value/100)} }
                     
                 >
-                    <EmojiIcon x="9" y="9" width="18px" height="18px" />
+                    {sliderEmoji}
+                    {/* <sliderEmoji x="9" y="9" width="18px" height="18px" /> */}
                 </CircularSlider>
                 <div className="webcam">
                     <WebcamCapture setEmotion={props.setEmotion}/>

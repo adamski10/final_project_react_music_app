@@ -9,6 +9,7 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
+       
         this.test = this.test.bind(this)
     }
 

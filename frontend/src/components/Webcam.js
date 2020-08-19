@@ -3,6 +3,8 @@ import Webcam from "react-webcam";
 import axios from 'axios';
 import bnw_camera_icon from '../Images/bnw_camera_icon.svg'
 
+
+
  
 const WebcamCapture = (props) => {
     // This creates a blank reference that any HTML element can later use to identify itself https://reactjs.org/docs/hooks-reference.html#useref
@@ -49,9 +51,10 @@ const WebcamCapture = (props) => {
           height= {420}
           width= {420}
           videoConstraints={videoConstraints}
+          mirrored={true}
         />
         
-          <button onClick={capture} className="capture-button">Capture photo</button>
+        <button onClick={capture} className="capture-button">Capture photo</button>
         
         {imgSrc && (
           <img
