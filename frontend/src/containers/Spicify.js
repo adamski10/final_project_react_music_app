@@ -35,15 +35,17 @@ class Spicify extends Component {
     //     console.log(this.state.selectedSongUri)
     // }
 
-    async handleSongUriContext(selectedUri) {
+    handleSongUriContext(selectedUri) {
         console.log("I'M CALLED", selectedUri)
-        await this.setState(prevState => { 
+        this.setState(prevState => { 
            return {
             ...prevState,
             selectedSongUri: selectedUri
            } 
+        }, () => {
+            console.log(this.state.selectedSongUri)
         })
-        console.log(this.state.selectedSongUri)
+        
     }
 
     convertEmotionToValance = () =>{
