@@ -23,9 +23,9 @@ class Track extends Component {
                         <button className="track-play-button" value={this.props.uri} onClick={this.handleSongSelection}><img src={PlayIcon}/></button>
                     </div>
                     <img className="album-cover" src={this.props.image} alt="" />
-                    <h3 className="title">{this.props.title}</h3>
+                    <h4 className="title">{this.props.title}</h4>
                     <h6 className="album">{this.props.album}</h6>
-                    <h4 className="artist">By {this.props.artist}</h4> 
+                    <h5 className="artist">By {this.props.artist}</h5> 
                 </div>
             </>
         )
