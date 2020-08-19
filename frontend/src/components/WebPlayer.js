@@ -43,24 +43,34 @@ class SpotifyWebPlayer extends Component {
     }
 
     handleScriptError() {
-        console.log("SPICY. GTFO, NERD.")
+        console.log("SPICY. SPOTIFY SDK SCRIPT LOAD ERROR.")
     }
 
     handleScriptLoad() {
         window.onSpotifyWebPlaybackSDKReady = () => {
+            console.log("SCRIPT LOADED")
             const token = this.props.accessToken;
             const player = new window.Spotify.Player({
                 name: 'Web Playback SDK Quick Start Player',
                 getOAuthToken: cb => { cb(token); }
             });
             player.connect();
-            this.setState({
-                webPlayer: player
+            this.setState(prevState => {
+                return {
+                    ...prevState,
+                    webPlayer: player
+                }
+            }, () => {
+                console.log("Player connected", this.state.webPlayer)
             })
             player.addListener('ready', ({ device_id }) => {
-                // console.log(device_id)
-                this.setState({
-                    device_id: device_id
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        device_id: device_id
+                    }
+                }, () => {
+                    console.log("Device ID loaded", this.state.device_id)
                 })
             })  
         }
@@ -106,7 +116,6 @@ class SpotifyWebPlayer extends Component {
     }
 
     startPlayback() {
-        console.log(this.props.selectedSongUri)
         fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.state.device_id}`, {
             method: "PUT",
             headers: {

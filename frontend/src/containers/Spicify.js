@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import Home from '../components/Home';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import SpotifyWebApi from 'spotify-web-api-js';
-import SpotifyWebPlayer from '../components/WebPlayer';
 import Login from "../components/Login";
 
 class Spicify extends Component {
@@ -30,7 +29,6 @@ class Spicify extends Component {
     }
 
     handleSongUriContext(selectedUri) {
-        console.log("I'M CALLED", selectedUri)
         this.setState(prevState => { 
            return {
             ...prevState,
@@ -38,8 +36,7 @@ class Spicify extends Component {
            } 
         }, () => {
             console.log(this.state.selectedSongUri)
-        })
-        
+        }) 
     }
 
     convertEmotionToValance = () =>{
@@ -158,18 +155,13 @@ class Spicify extends Component {
     render() {
         return (
             <Router>
-                <>  
-                    <SpotifyWebPlayer 
-                        selectedSongUri={this.state.selectedSongUri}
-                        accessToken={this.state.userToken}
-                        tracks={this.state.tracks}
-                        >    
-                    </SpotifyWebPlayer>
-                
+                <>
                     <Route exact path="/" component={Login}/>
                     <Route 
                         path="/spicify"
-                        render={() => <Home 
+                        render={() => <Home
+                        selectedSongUri={this.state.selectedSongUri}
+                        accessToken={this.state.userToken}
                         tracks={this.state.tracks}    
                         handleSetTracks={this.filterTracksBasedOnMood}    
                         handleLoggedIn={this.changeLoggedIn}
