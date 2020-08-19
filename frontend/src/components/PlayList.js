@@ -22,7 +22,6 @@ class PlayList extends Component {
 
   saveTracksToPlaylist() {
     const trackUris = this.props.tracks.map(track => track.uri)
-    console.log(trackUris);
     fetch(`http://localhost:8080/add_to_playlist/${this.state.newPlaylist.body.id}`, {
       method: "POST",
       headers: {
@@ -31,7 +30,6 @@ class PlayList extends Component {
       body: JSON.stringify({trackUris})
     })
     .then(res => res.json())
-    .then(tracks => console.log("Success!"))
   }
 
   handleSavePlaylist(playlistName) {
