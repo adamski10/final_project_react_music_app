@@ -13,7 +13,9 @@ class SpotifyWebPlayer extends Component {
             device_id: null,
             volume: null,
             trackUris: null,
-            userHasChosenSpecificTrack: null
+            userHasChosenSpecificTrack: null,
+            currentTrack: null,
+            nextTrack: null
         }
 
         this.handleScriptError = this.handleScriptError.bind(this);
@@ -25,11 +27,14 @@ class SpotifyWebPlayer extends Component {
         this.pausePlayback = this.pausePlayback.bind(this);
         this.startPlayback = this.startPlayback.bind(this);
         this.handleSelectedContextUri = this.handleSelectedContextUri.bind(this);
+        this.getCurrentPlayback = this.getCurrentPlayback.bind(this);
+        this.playButtonLogic = this.playButtonLogic.bind(this);
     }
 
     handleSelectedContextUri() {
         if (this.props.selectedSongUri) {
             return { "uri": `${this.props.selectedSongUri}` }
+            this.getCurrentPlayback();
         }
         return { "position": 0 }
     }
@@ -110,6 +115,7 @@ class SpotifyWebPlayer extends Component {
                 }
             }, () => console.log("Player resumed"))
         })
+        this.getCurrentPlayback()
     }
 
     pausePlayback() {
@@ -124,6 +130,38 @@ class SpotifyWebPlayer extends Component {
                 }
             }, () => console.log("Player paused"))
         })
+    }
+
+    getCurrentPlayback() {
+        if (this.state.playerInitialise || this.state.playerResume) {
+            const result = this.state.webPlayer.getCurrentState()
+            .then(state => {
+                console.log(state)
+                const {current_track, next_tracks} = state.track_window
+                this.setState(prevState => {
+                    return {
+                        ...prevState,
+                        currentTrack: current_track,
+                        nextTrack: next_tracks
+                    }
+                }, () => {
+                    console.log(this.state.currentTrack)
+                    console.log(this.state.nextTrack)
+                }) 
+            })
+        }
+    }
+
+    playButtonLogic() {
+        if (!this.state.playerInitialise) {
+            this.startPlayback()
+        }
+        else if (this.state.playerPause && this.state.playerInitialise) {
+            this.resumePlayback()
+        }
+        else {
+              this.pausePlayback()
+        }
     }
 
     startPlayback() {
@@ -146,6 +184,7 @@ class SpotifyWebPlayer extends Component {
                 playerPause: false
             }
         }, () => console.log("Player initialised"))
+        this.getCurrentPlayback();
     }
 
     render() {
@@ -158,17 +197,7 @@ class SpotifyWebPlayer extends Component {
                     onLoad={this.handleScriptLoad}>
                 </Script>
                 <button onClick={this.setPreviousTrack}>Previous</button>
-                <button onClick={() => {
-                    if (!this.state.playerInitialise) {
-                        this.startPlayback()
-                    }
-                    else if (this.state.playerPause && this.state.playerInitialise) {
-                        this.resumePlayback()
-                    }
-                    else {
-                          this.pausePlayback()
-                    }
-                }}>
+                <button onClick={this.playButtonLogic}>
                     {this.state.playerPause ? "RESUME" : "PAUSE"}
                 </button>
                 <button onClick={this.setNextTrack}>Next</button>
