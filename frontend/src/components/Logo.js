@@ -1,10 +1,10 @@
 import React from 'react'
+import LogoImage from "./logo.png"
 
 const Logo = (props) => {
 
   return (
-
-      <h2>Spicify Logo</h2>
+        <img className="logo" src={LogoImage} alt=""/>
   )
 
 }
