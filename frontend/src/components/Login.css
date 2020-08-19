@@ -1,0 +1,41 @@
+.logo {
+    width: 25em;
+    height: auto;
+}
+
+#login-page {
+    display: grid;
+    grid-template-rows: 3fr 1fr;
+    justify-content: center;
+    ba
+}
+
+.login-button {
+    width: 15em;
+    height: 5em;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: larger;
+    background: rgb(40, 48, 76);
+    padding: 20px;
+    border: 4px solid #ffffff !important;
+    display: inline-block;
+    transition: all 0.4s ease 0s;
+    justify-self: center;
+    border-radius: 13px;
+}
+
+.login-button:hover {
+    color: #ffffff !important;
+    background: rgb(225, 62, 114);
+    border-color: rgb(225, 62, 114) !important;
+    transition: all 0.4s ease 0s;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+
