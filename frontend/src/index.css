@@ -23,7 +23,7 @@ code {
 
 .home {
   /* border: solid black 1px; */
-  border-radius: 15%;
+  border-radius: 40px;
   background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
   display: flex;
   justify-content: center;

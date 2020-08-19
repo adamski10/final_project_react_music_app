@@ -1,15 +1,12 @@
 
 li {
-    border-radius: 5%/20%;
+    border-radius: 30px;
     background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
     display: grid;
     grid-template-columns: 1fr 1fr 5fr 3fr;
-    width: 60%;
-    height: 80%;
     max-width: 800px;
     margin: 0 auto;
     margin-top: 1%;
-    padding: 30px;
     box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
       inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
       inset -6px -6px 10px 0 rgba(128, 125, 122, 0);

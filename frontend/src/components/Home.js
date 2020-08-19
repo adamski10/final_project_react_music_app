@@ -6,12 +6,14 @@ import PlayBar from './PlayBar.js';
 import PlayList from './PlayList.js';
 import SpotifyWebPlayer from './WebPlayer';
 import mygif2003 from '../Images/coffee.gif'
+import Song from '../Music/song.mpeg'
 
 class Home extends Component {
 
     constructor(props) {
         super(props);
         this.handleGeneratePlaylist = this.handleGeneratePlaylist.bind(this)
+        this.play = this.play.bind(this)
     }
 
     componentDidMount() {
@@ -21,6 +23,13 @@ class Home extends Component {
     handleGeneratePlaylist() {
         this.props.handleSetTracks();
     }
+
+    play() {
+        const song = new Audio(Song)
+        song.play()
+    }
+
+    
 
     render() {
         return (
@@ -42,7 +51,7 @@ class Home extends Component {
                 <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
                 <div className="secret">
                     <div id="hovershow1" className='coffee_gif'>
-                    { <img src={mygif2003}/> }
+                    { <img onClick={this.play} src={mygif2003}/> }
                     </div>
                 </div>
             </div>
