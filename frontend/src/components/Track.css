@@ -1,12 +1,30 @@
 
-li {
+@font-face {
+    font-family: "CustomFont";
+    src: url('../Fonts/museomoderno-variablefont_wght-webfont.woff');
+}
+
+.tracks-container {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    flex-direction: column;
+    
+}
+
+.list-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 30px;
     background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
-    display: grid;
-    grid-template-columns: 1fr 1fr 5fr 3fr;
-    max-width: 800px;
+    box-sizing: border-box;
+    max-height: 140px;
+    margin: 20px;
+    /* grid-template-columns: 1fr 1fr 5fr 3fr; */
+    /* max-width: 800px;
     margin: 0 auto;
-    margin-top: 1%;
+    margin-top: 1%; */
     box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
       inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
       inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
@@ -14,33 +32,42 @@ li {
 } 
 
 .album-cover {
-    justify-self: center;
-    align-self: center;
+    
+    
 }
 
-.track-album-div {
-    margin: 1em;
-}
 
 .artist {
-    align-self: center;
+    font-weight: lighter;
+    font-family: "CustomFont";
+    color: rgb(214, 213, 213);
+}
+
+.album {
+    font-weight: lighter;
+    font-family: "CustomFont";
+    color: rgb(214, 213, 213);
+}
+
+.title {
+    font-weight: lighter;
+    font-family: "CustomFont";
+    color: rgb(214, 213, 213);
+}
+
+.track-play-wrapper {
+    display: flex;
+    max-width: 20%;
 }
 
 .track-play-button{
-  /* background-color: #4CAF50;  */
-  /* border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  align-self: center; */
-  width: 180px; 
-  background-image: url('../Images/play_transparent.png');
+  
+  border: none;
+  background-color: transparent;
   background-size: cover;
-  -webkit-transform: scale(0.2)
-  /* mix-blend-mode: multiply; */
-  /* border: none; */
+  -webkit-transform: scale(0.1) 
+   /* mix-blend-mode: multiply;  */
 }
+
+
 

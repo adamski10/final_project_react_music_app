@@ -20,10 +20,9 @@ const PlayList = (props) => {
     })
 
     return (
-        <ul className="tracks-container">
+      <div className="tracks-container">
             { trackNodes }
-        </ul>
-      
+      </div>
     )
   } return null;
 
