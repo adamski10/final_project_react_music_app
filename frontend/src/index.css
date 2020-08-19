@@ -183,15 +183,11 @@ video {
   padding: 0.1em;
 }
 
+.secret:hover  {
+  display: block;
+  opacity: 1;
+ }
 
-
-
-
-
-
-
-
-
-
-
-
+ .secret {
+   opacity: 0;
+ }

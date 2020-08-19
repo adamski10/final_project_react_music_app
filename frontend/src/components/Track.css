@@ -40,8 +40,10 @@ li {
   font-size: 16px;
   align-self: center; */
   width: 180px; 
-  background-image: url('../Images/play_icon.png');
+  background-image: url('../Images/play_transparent.png');
   background-size: cover;
   -webkit-transform: scale(0.2)
+  /* mix-blend-mode: multiply; */
+  /* border: none; */
 }
 
