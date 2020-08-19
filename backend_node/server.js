@@ -117,7 +117,7 @@ const getAllTracksForPlaylists = (playlists) => {
 //GET LIST OF ALL USER'S SONGS WITH THEIR AUDIO FEATURES
 app.get('/songs', (req,res) => {
   try {
-    spotifyApi.getUserPlaylists({limit: 50}).catch((e) => {console.log(e.message)})
+    spotifyApi.getUserPlaylists({limit: 5}).catch((e) => {console.log(e.message)})
     .then(getAllTracksForPlaylists)
     .then(convertPromisesToOne)
     .then((playlistTracks) => {
@@ -128,16 +128,31 @@ app.get('/songs', (req,res) => {
       const tracksMoodsPromises = trackIds.map(id => {
         return spotifyApi.getAudioFeaturesForTrack(id)
           .then(result => result.body)
+          .catch(console.error)
       })
 
       Promise.all(tracksMoodsPromises)
         .then(tracksMoods => res.json(tracksMoods))
+        .catch(console.error)
     })
+    .catch(console.error)
 
   } catch (err) {
     res.status(400).send(err)
   }
 });
+
+app.get("/songs/:id", (req, res) => {
+
+  try {
+    const id = req.params.id
+    spotifyApi.getTrack(id)
+    .then(trackDetails => res.json(trackDetails.body))
+  } catch (err) {
+    res.status(400).send(err)
+  }
+
+})
 
 app.get("/refresh_token", (req, res) => {
   spotifyApi.refreshAccessToken().then(

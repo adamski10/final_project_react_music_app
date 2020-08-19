@@ -1,0 +1,17 @@
+li {
+    display: grid;
+    grid-template-columns: 1fr 5fr 3fr;
+}
+
+.album-cover {
+    justify-self: center;
+    align-self: center;
+}
+
+.track-album-div {
+    margin: 1em;
+}
+
+.artist {
+    align-self: center;
+}

@@ -9,15 +9,14 @@ class Home extends Component {
 
     constructor(props) {
         super(props);
-       
-        this.test = this.test.bind(this)
+        this.handleGeneratePlaylist = this.handleGeneratePlaylist.bind(this)
     }
 
     componentDidMount() {
         this.props.handleLoggedIn();
     }
 
-    test() {
+    handleGeneratePlaylist() {
         this.props.handleSetTracks();
     }
 
@@ -25,7 +24,6 @@ class Home extends Component {
         return (
             <div className="home">
                 <Logo />
-                <button onClick={this.test}>Heeeey</button>
                 <MoodSelector 
                 setSliderValence={this.props.setSliderValence} 
                 setEmotion={this.props.setEmotion} 
@@ -33,8 +31,9 @@ class Home extends Component {
                 setSliderDanciness={this.props.setSliderDanciness}
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
+                <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
                 <PlayBar />
-                <PlayList />
+                <PlayList tracks={this.props.tracks}/>
             </div>
         )
         }

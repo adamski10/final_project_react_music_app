@@ -4,7 +4,7 @@ const Logo = (props) => {
 
   return (
 
-      <h2>Spicfy Logo</h2>
+      <h2>Spicify Logo</h2>
   )
 
 }
