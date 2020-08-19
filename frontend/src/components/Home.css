@@ -38,12 +38,12 @@
   transition: all .3s ease-in-out 0s;
 }
 
-.generate-button:hover, .generate-button:focus {
+.generate-button:hover {
   color: #313133;
   transform: translateY(-6px);
 }
 
-.generate-button:hover::before, .generate-button:focus::before {
+.generate-button:hover::before {
   opacity: 1;
 }
 

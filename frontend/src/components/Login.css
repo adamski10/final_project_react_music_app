@@ -17,7 +17,6 @@
     font-size: 22px;
     font-weight: 700;
     color: #313133;
-    background: #4FD1C5;
     background: linear-gradient(to right,rgb(255, 159, 142), rgb(255, 103, 151) );
     border: none;
     border-radius: 15px;
@@ -30,32 +29,16 @@
     display: block;
     margin-left: auto;
     margin-right: auto;
-    }
+}
   
-  .login-button::before {
-    content: '';
-    border-radius: 25px;
-    min-width: calc(300px + 12px);
-    min-height: calc(60px + 12px);
-    border: 6px solid rgb(255, 103, 151);
-    box-shadow: 0 0 60px rgba(255, 103, 151, .64);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: all .3s ease-in-out 0s;
-  }
-  
-  .login-button:hover, .login-button:focus {
+.login-button:hover {
     color: #313133;
     transform: translateY(-6px);
-  }
+}
   
-  .login-button:hover::before, .login-button:focus::before {
+.login-button:hover::before {
     opacity: 1;
-  }
-  
+}
 
 a {
     color: white;
