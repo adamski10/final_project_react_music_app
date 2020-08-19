@@ -1,7 +1,7 @@
 @font-face {
     font-family: "CustomFont";
     src: url('../Fonts/museomoderno-variablefont_wght-webfont.woff');
-  }
+}
 
 .generate-button {
   min-width: 300px;
@@ -13,7 +13,7 @@
   background: #4FD1C5;
   background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
   border: none;
-  border-radius: 1000px;
+  border-radius: 15px;
   box-shadow: 10px 10px 20px rgba(79,209,197,.64);
   transition: all 0.3s ease-in-out 0s;
   cursor: pointer;
@@ -25,7 +25,7 @@
 
 .generate-button::before {
   content: '';
-  border-radius: 1000px;
+  border-radius: 25px;
   min-width: calc(300px + 12px);
   min-height: calc(60px + 12px);
   border: 6px solid #00FFCB;
@@ -38,7 +38,7 @@
   transition: all .3s ease-in-out 0s;
 }
 
-.generate-button:hover, .button:focus {
+.generate-button:hover, .generate-button:focus {
   color: #313133;
   transform: translateY(-6px);
 }
