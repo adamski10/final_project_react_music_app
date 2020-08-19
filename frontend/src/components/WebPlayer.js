@@ -11,8 +11,10 @@ class SpotifyWebPlayer extends Component {
             playerPause: null,
             device_id: null,
             volume: null,
-            trackUris: null
+            trackUris: null,
+            userHasChosenSpecificTrack: null
         }
+
         this.handleScriptError = this.handleScriptError.bind(this);
         this.handleScriptLoad = this.handleScriptLoad.bind(this);
         this.setPlayerVolume = this.setPlayerVolume.bind(this);
@@ -21,11 +23,22 @@ class SpotifyWebPlayer extends Component {
         this.resumePlayback = this.resumePlayback.bind(this);
         this.pausePlayback = this.pausePlayback.bind(this);
         this.startPlayback = this.startPlayback.bind(this);
+        this.handleSelectedContextUri = this.handleSelectedContextUri.bind(this);
+    }
+
+    handleSelectedContextUri() {
+        if (this.props.selectedSongUri) {
+            return { "uri": `${this.props.selectedSongUri}` }
+        }
+        return { "position": 0 }
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevProps.tracks != this.props.tracks) {
+        if (prevProps.tracks !== this.props.tracks) {
             this.setState( { trackUris: this.props.tracks.map(track => track.uri)})
+        }
+        if (prevProps.selectedSongUri !== this.props.selectedSongUri) {
+            this.startPlayback()
         }
     }
 
@@ -93,6 +106,7 @@ class SpotifyWebPlayer extends Component {
     }
 
     startPlayback() {
+        console.log(this.props.selectedSongUri)
         fetch(`https://api.spotify.com/v1/me/player/play?device_id=${this.state.device_id}`, {
             method: "PUT",
             headers: {
@@ -100,7 +114,8 @@ class SpotifyWebPlayer extends Component {
                 "Authorization": `Bearer ${this.props.accessToken}`
             },
             body: JSON.stringify({
-                "uris": this.state.trackUris
+                "uris": this.props.tracks.map(track => track.uri),
+                "offset": this.handleSelectedContextUri()
             })
         })
         this.setState({
@@ -126,10 +141,10 @@ class SpotifyWebPlayer extends Component {
                           this.resumePlayback()
                     }
                 }}>
-                    {this.state.playerPause ? "CAUSE I'M HAVING A GOOD TIME" : "DON'T STOP ME NOW"}
+                    {this.state.playerPause ? "RESUME" : "PAUSE"}
                 </button>
                 <button onClick={this.setNextTrack}>Next</button>
-                <button onClick={this.startPlayback}>HIT ME BABY ONE MORE TIME</button>
+                <button onClick={this.startPlayback}>PLAY</button>
                 <label htmlFor="volume-slider">Set Volume</label>
                 <input 
                     type="range" 
