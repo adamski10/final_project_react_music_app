@@ -13,7 +13,7 @@ body {
 
 html {
   background: linear-gradient(135deg, rgb(40, 48, 76), rgb(50, 60, 92));
-  background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg');
+  /* background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg'); */
 }
 
 code {
@@ -37,6 +37,7 @@ code {
     inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
     inset -6px -6px 10px 0 rgba(128, 125, 122, 0);
 }
+
 
 .slide-bars-container {
   border-radius: 5%/20%;

@@ -1,5 +1,6 @@
 import React from 'react'
 import Track from "./Track"
+import "./Track.css"
 
 const PlayList = (props) => {
 
@@ -19,9 +20,10 @@ const PlayList = (props) => {
     })
 
     return (
-      <ul>
-          { trackNodes }
-      </ul>
+        <ul className="tracks-container">
+            { trackNodes }
+        </ul>
+      
     )
   } return null;
 

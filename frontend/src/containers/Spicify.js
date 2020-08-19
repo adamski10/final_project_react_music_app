@@ -158,13 +158,14 @@ class Spicify extends Component {
     render() {
         return (
             <Router>
-                <>
-                    <SpotifyWebPlayer
+                <>  
+                    <SpotifyWebPlayer 
                         selectedSongUri={this.state.selectedSongUri}
                         accessToken={this.state.userToken}
                         tracks={this.state.tracks}
                         >    
                     </SpotifyWebPlayer>
+                
                     <Route exact path="/" component={Login}/>
                     <Route 
                         path="/spicify"

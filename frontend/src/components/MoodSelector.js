@@ -14,35 +14,6 @@ import { ReactComponent as Emoji1f601 } from '../Images/svg_emojis/1f601.svg'
 import { ReactComponent as Emoji1f929 } from '../Images/svg_emojis/1f929.svg'
 
 
-    const allRanges = document.querySelectorAll(".range-wrap");
-
-    allRanges.forEach((wrap) => {
-        const range = wrap.querySelector(".range");
-        const bubble = wrap.querySelector(".bubble");
-
-        range.addEventListener("input", () => {
-            setBubble(range, bubble);
-        });
-
-        // setting bubble on DOM load
-        setBubble(range, bubble);
-    });
-
-    function setBubble(range, bubble) {
-    const val = range.value;
-
-    const min = range.min || 0;
-    const max =  range.max || 100;
-
-    const offset = Number(((val - min) * 100) / (max - min));
-
-    bubble.textContent = val;
-
-    // yes, 14px is a magic number
-    bubble.style.left = `calc(${offset}% - 14px)`;
-    }
-
-
 
 
 const MoodSelector = (props, { emotion } = props) => {    
@@ -94,6 +65,34 @@ const MoodSelector = (props, { emotion } = props) => {
                 console.log("i'm default")
                 break;
         }
+
+        const allRanges = document.querySelectorAll(".range-wrap");
+
+    allRanges.forEach((wrap) => {
+        const range = wrap.querySelector(".range");
+        const bubble = wrap.querySelector(".bubble");
+
+        range.addEventListener("input", () => {
+            setBubble(range, bubble);
+        });
+
+        // setting bubble on DOM load
+        setBubble(range, bubble);
+    });
+
+    function setBubble(range, bubble) {
+    const val = range.value;
+
+    const min = range.min || 0;
+    const max =  range.max || 100;
+
+    const offset = Number(((val - min) * 100) / (max - min));
+
+    bubble.textContent = val;
+
+    // yes, 14px is a magic number
+    bubble.style.left = `calc(${offset}% - 14px)`;
+    }
 
     }
 
