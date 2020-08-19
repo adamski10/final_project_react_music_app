@@ -107,9 +107,7 @@ class Spicify extends Component {
 
     checkIfSongIsWithinRange(song, mood) {
         const delta = 0.1;
-        // const moodKeys = Object.keys(mood);
         for (const key in mood) {
-            console.log(key + song[key]);
             if (song[key].toFixed(1) <= (mood[key] += delta).toFixed(1) && song[key].toFixed(1) >= (mood[key] -= delta).toFixed(1)) {
                 return true
             }
@@ -124,12 +122,7 @@ class Spicify extends Component {
             energy: this.state.energy
         };
 
-        console.log(mood.valence);
-
         const filteredSongs = this.state.userSongs.filter(song => {
-            // if (song.valence.toFixed(1) === mood.valence.toFixed(1) && song.danceability.toFixed(1) === mood.danceability.toFixed(1) && song.energy.toFixed(1) === mood.energy.toFixed(1)) {
-            //     return true
-            // }
             if (this.checkIfSongIsWithinRange(song, mood)) {
                 return song
             }
