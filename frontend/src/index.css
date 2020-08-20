@@ -198,6 +198,7 @@ video {
   position: sticky;
   top: 0;
   box-shadow: 5px 5px 15px 5px #00000045;
+  z-index: 9
 
  }
 
