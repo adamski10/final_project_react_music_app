@@ -76,6 +76,7 @@
 
 .track-play-button > img {
     transform: translateX(-25%);
+    display: block;
     
 }
 

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./Track.css"
-import PlayIcon from "../Images/play_icon_logo_gradient.jpeg"
+import PlayIcon from "../Images/play_icon_logo_gradient_transp.png"
 
 class Track extends Component {
 
