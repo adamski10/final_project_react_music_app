@@ -63,26 +63,29 @@
 }
 
 .track-play-wrapper {
-    display: flex;
     max-width: 20%;
 }
 
 .track-play-button{
-  display: flex;
+  /* display: flex;
   justify-content: left;
-  align-items: center;
+  align-items: center; */
   border: none;
   background-color: transparent;
   background-size: cover;
   cursor: pointer; 
-  -webkit-transform: scale(0.1) 
-   /* mix-blend-mode: multiply;  */
-  
+   -webkit-transform: scale(0.1) translate(-850px);
+   /* background-image: url('../Images/play_transparent.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1; */
+    
 }
 
 
 .track-play-button > img {
-    transform: translateX(-250%);
+    transform: translateX(-25%);
+    position: relative;
 }
 
 
