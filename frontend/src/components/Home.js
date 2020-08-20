@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import MoodSelector from './MoodSelector';
-import Logo from './Logo.js';
+import LogoHome from './Logo.js';
 import MoodTracker from './MoodTracker.js';
 import PlayBar from './PlayBar.js';
 import PlayList from './PlayList.js';
@@ -68,7 +68,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home">
-                <Logo />
+                <LogoHome id="logo-home"/>
                 <MoodSelector 
                 setSliderValence={this.props.setSliderValence} 
                 setEmotion={this.props.setEmotion} 
