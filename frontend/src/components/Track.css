@@ -20,8 +20,9 @@
     /* background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126)); */
     background: linear-gradient(135deg, rgba(147,206,222,0.92) 0%, rgba(120,191,210,1) 8%, rgba(117,189,209,0.51) 21%, rgba(189,73,147,0.47) 90%);
     box-sizing: border-box;
+    transform: translateX(1.5%);
     max-height: 60px;
-    max-width: 760px;
+    width: 95%;
     margin: 10px;
     box-shadow: -5px 7px 62px 16px rgb(28, 34, 54),
       inset 6px 6px 10px 0 rgba(0, 0, 0, 0),
