@@ -256,88 +256,42 @@ class SpotifyWebPlayer extends Component {
                         onError={this.handleScriptError} 
                         onLoad={this.handleScriptLoad}>
                     </Script>
-                    <div className="controls_parent_triplet"></div>
-                    <div className="controls_parent_centre">
-                        <img className="media_button" src={previous} onClick={this.setPreviousTrack}/>
-                        <img className="media_button" src={this.playButtonNameLogic()} onClick={() => {
-                            this.playButtonLogic()
-                            this.getPlaybackProgress()
-                        }}/>
-                        <img className="media_button" src={next} onClick={this.setNextTrack}/>
+                    <div className="playbar_horizontal_parent">
+                        <div className="controls_parent_triplet"></div>
+                        <div className="controls_parent_centre">
+                            <img className="media_button" src={previous} onClick={this.setPreviousTrack}/>
+                            <img className="media_button" src={this.playButtonNameLogic()} onClick={() => {
+                                this.playButtonLogic()
+                                this.getPlaybackProgress()
+                            }}/>
+                            <img className="media_button" src={next} onClick={this.setNextTrack}/>
+                        </div>
+                        <div className="controls_parent_triplet">
+                            <input 
+                                type="range" 
+                                id="volume-slider" 
+                                min="0" 
+                                max="1" 
+                                step="0.01"
+                                // value={this.state.volume}
+                                onChange={this.setPlayerVolume}>
+                            </input>
+                        </div>
                     </div>
-                    <input //seek bar stuff - commented out for now
-                        type="range"
-                        id="seek-bar"
-                        min="0"
-                        max={this.state.currentTrack ? this.state.currentTrack.duration_ms : 0}
-                        step="0.05"
-                        value={this.state.currentPosition}>
-                    </input>
-                    <div className="controls_parent_triplet">
-                        <input 
-                            type="range" 
-                            id="volume-slider" 
-                            min="0" 
-                            max="1" 
-                            step="0.01"
-                            // value={this.state.volume}
-                            onChange={this.setPlayerVolume}>
+                    <div className="playbar_horizontal_parent_lower">
+                        <input //seek bar stuff - commented out for now
+                            type="range"
+                            id="seek-bar"
+                            min="0"
+                            max={this.state.currentTrack ? this.state.currentTrack.duration_ms : 0}
+                            step="0.05"
+                            value={this.state.currentPosition}>
                         </input>
                     </div>
                 </div>
             </>
         )
     }
-
-    // render() {
-    //     return (
-    //         <>
-    //             <Script 
-    //                 url="https://sdk.scdn.co/spotify-player.js"
-    //                 onCreate={this.handleScriptCreate}
-    //                 onError={this.handleScriptError} 
-    //                 onLoad={this.handleScriptLoad}>
-    //             </Script>
-    //             <button onClick={this.setPreviousTrack}>Previous</button>
-    //             {/* <button onClick={this.playButtonLogic}>
-    //                 {this.state.playerPause ? "RESUME" : "PAUSE"}
-    //             </button> */}
-    //             <input 
-    //                 type="image" 
-    //                 onClick={() => {
-    //                     this.playButtonLogic()
-    //                     // this.getPlaybackProgress(); - seek bar stuff - commented out for now
-    //                 }} 
-    //                 src={this.playButtonNameLogic()}
-    //                 width="50"
-    //                 height="50">
-    //             </input>
-    //             {/* <label htmlFor="seek-bar">Seek bar</label> */}
-    //             {/* <input //seek bar stuff - commented out for now
-    //                 type="range"
-    //                 id="seek-bar"
-    //                 min="0"
-    //                 max={this.state.currentTrack ? `${this.state.currentTrack.duration_ms}` : 0}
-    //                 step="0.05"
-    //                 value={this.state.currentPosition}
-    //                 onInput={this.seekBar()}
-    //                 >
-    //             </input> */}
-    //             <button onClick={this.setNextTrack}>Next</button>
-    //             <label htmlFor="volume-slider">Set Volume</label>
-    //             <input 
-    //                 type="range" 
-    //                 id="volume-slider" 
-    //                 min="0" 
-    //                 max="1" 
-    //                 step="0.01"
-    //                 // value={this.state.volume}
-    //                 onChange={this.setPlayerVolume}>
-    //             </input>
-    //         </>
-    //     )
-    // }
-
 }
 
 export default SpotifyWebPlayer;
