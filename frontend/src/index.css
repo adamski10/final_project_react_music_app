@@ -258,7 +258,6 @@ input[type=range]::-webkit-slider-runnable-track {
   border-radius: 25px;
   border: 0px solid #000101;
   filter:  drop-shadow(0px 0px 2px white);
-
 }
 
 input[type=range]::-webkit-slider-thumb:hover {
@@ -275,7 +274,6 @@ input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -4px;
   filter:  drop-shadow(0px 0px 2px white);
-
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
   background: #2f354e;

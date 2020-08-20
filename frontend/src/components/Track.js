@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import "./Track.css"
-import PlayIcon from "../Images/play_icon_black.png"
+import PlayIcon from "../Images/play_button.svg"
 
 class Track extends Component {
 
