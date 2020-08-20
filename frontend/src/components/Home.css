@@ -3,6 +3,12 @@
     src: url('../Fonts/museomoderno-variablefont_wght-webfont.woff');
 }
 
+.logo {
+  margin-bottom: 50px;
+  margin-top: 50px !important; 
+
+}
+
 .generate-button {
   min-width: 300px;
   min-height: 60px;
