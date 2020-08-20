@@ -23,7 +23,8 @@ class SpotifyWebPlayer extends Component {
             currentTrack: null,
             currentState: null,
             nextTrack: null,
-            currentPosition: null
+            currentPosition: 0,
+            intervalReference: null
         }
 
         this.handleScriptError = this.handleScriptError.bind(this);
@@ -58,6 +59,9 @@ class SpotifyWebPlayer extends Component {
         // if (prevState.currentPosition !== this.state.currentPosition) {
         //     this.getPlaybackProgress()
         // }
+    }
+
+    componentDidMount() {
     }
 
     handleScriptError() {
@@ -103,12 +107,18 @@ class SpotifyWebPlayer extends Component {
 
     setPreviousTrack() {
         this.state.webPlayer.previousTrack()
-        .then(() => console.log("Previous track"))
+        .then(() => {
+            this.getCurrentPlayback();
+            this.getPlaybackProgress();
+        })
     }
 
     setNextTrack() {
         this.state.webPlayer.nextTrack()
-        .then(() => console.log("Set to next track"))
+        .then(() => {
+            this.getCurrentPlayback();
+            this.getPlaybackProgress();
+        })
     }
 
     resumePlayback() {
@@ -121,10 +131,12 @@ class SpotifyWebPlayer extends Component {
                     playerResume: true,
                     playerPause: false
                 }
-            }, () => console.log("Player resumed"))
+            }, () => {
+                this.getCurrentPlayback();
+                this.getPlaybackProgress();
+            })
         })
-        this.getCurrentPlayback();
-        this.getPlaybackProgress();
+        
     }
 
     pausePlayback() {
@@ -141,7 +153,7 @@ class SpotifyWebPlayer extends Component {
         })
     }
 
-    getPlaybackProgress() {
+    getPlaybackProgress() { //change name
         if (this.state.playerInitialise) {
             fetch("https://api.spotify.com/v1/me/player", {
                 headers: {
@@ -149,18 +161,19 @@ class SpotifyWebPlayer extends Component {
                 }
             })
             .then(res => res.json())
-            .then((playback) => {
-                this.setState(prevState => {
-                    return {
-                        ...prevState,
-                        currentPosition: playback.progress_ms
-                    }
-                }, () => console.log(this.state.currentPosition))
-            })
+            .then((playback => this.setState({currentPosition: playback.progress_ms})))
+            // .then((playback) => {
+            //     this.setState(prevState => {
+            //         return {
+            //             ...prevState,
+            //             currentPosition: playback.progress_ms
+            //         }
+            //     }, () => console.log(this.state.currentPosition))
+            // })
         }  
     }
 
-    getCurrentPlayback() {
+    getCurrentPlayback() { //change name
         if (this.state.playerInitialise || this.state.playerResume) {
             this.state.webPlayer.getCurrentState()
             .then(state => {
@@ -178,19 +191,26 @@ class SpotifyWebPlayer extends Component {
         }
     }
 
-    seekBar = () => {
-        setTimeout(this.getPlaybackProgress, 3000)
+    initialiseProgressBar() {
+        const intervalReference = setInterval(this.getPlaybackProgress, 1000)
+        this.setState({intervalReference: intervalReference})
+    }
+
+    componentWillUnmount(){
+        console.log("component unmount, interval stopped")
+        clearInterval(this.state.intervalReference)
     }
 
     playButtonLogic() {
         if (!this.state.playerInitialise) {
             this.startPlayback()
+            this.initialiseProgressBar();
         }
         else if (this.state.playerPause && this.state.playerInitialise) {
             this.resumePlayback()
         }
         else {
-              this.pausePlayback()
+            this.pausePlayback()
         }
     }
 
@@ -214,16 +234,19 @@ class SpotifyWebPlayer extends Component {
                 "uris": this.props.tracks.map(track => track.uri),
                 "offset": this.handleSelectedContextUri()
             })
-        })
-        // this.getCurrentPlayback();
-        this.setState((prevState) => {
+        }).then(() => {
+            this.setState((prevState) => {
             return {
                 ...prevState,
                 playerInitialise: true,
                 playerResume: true,
                 playerPause: false
             }
-        }, () => console.log("Player initialised"))
+        }, () => {
+            this.getCurrentPlayback()
+            this.getPlaybackProgress();
+        })})
+        
     }
 
     render() {
@@ -243,23 +266,22 @@ class SpotifyWebPlayer extends Component {
                     type="image" 
                     onClick={() => {
                         this.playButtonLogic()
-                        // this.getPlaybackProgress(); - seek bar stuff - commented out for now
+                        this.getPlaybackProgress(); //- seek bar stuff - commented out for now
                     }} 
                     src={this.playButtonNameLogic()}
                     width="50"
                     height="50">
                 </input>
-                {/* <label htmlFor="seek-bar">Seek bar</label> */}
-                {/* <input //seek bar stuff - commented out for now
+                <label htmlFor="seek-bar">Seek bar</label>
+                <input //seek bar stuff - commented out for now
                     type="range"
                     id="seek-bar"
                     min="0"
-                    max={this.state.currentTrack ? `${this.state.currentTrack.duration_ms}` : 0}
+                    max={this.state.currentTrack ? this.state.currentTrack.duration_ms : 0}
                     step="0.05"
                     value={this.state.currentPosition}
-                    onInput={this.seekBar()}
                     >
-                </input> */}
+                </input>
                 <button onClick={this.setNextTrack}>Next</button>
                 <label htmlFor="volume-slider">Set Volume</label>
                 <input 
