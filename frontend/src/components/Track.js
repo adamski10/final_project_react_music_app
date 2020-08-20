@@ -9,9 +9,9 @@ class Track extends Component {
         this.handleSongSelection = this.handleSongSelection.bind(this)
     }
 
-    handleSongSelection(event) {
-        console.log(event.target.value)
-        this.props.handleSelectedSongUri(event.target.value)
+    handleSongSelection() {
+        console.log(this.props.uri)
+        this.props.handleSelectedSongUri(this.props.uri)
     }
 
     render() {
@@ -20,7 +20,7 @@ class Track extends Component {
                 
                 <div className="list-item">
                     <div className="track-play-wrapper">
-                        <button className="track-play-button" value={this.props.uri} onClick={this.handleSongSelection}><img src={PlayIcon}/></button>
+                        <img className="track-play-button"  onClick={this.handleSongSelection} src={PlayIcon}/>
                     </div>
                     <img className="album-cover" src={this.props.image} alt="" />
                     <h4 className="title">{this.props.title}</h4>
