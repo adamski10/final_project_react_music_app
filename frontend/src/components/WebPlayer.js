@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import Script from 'react-load-script';
+import previous from '../Images/prev_icon.svg'
+import next from '../Images/next_button.svg'
+import play from '../Images/play_button.svg'
+import pause from '../Images/pause_button.svg'
 
 class SpotifyWebPlayer extends Component {
 
@@ -135,35 +139,45 @@ class SpotifyWebPlayer extends Component {
     render() {
         return (
             <>
-                <Script 
-                    url="https://sdk.scdn.co/spotify-player.js"
-                    onCreate={this.handleScriptCreate}
-                    onError={this.handleScriptError} 
-                    onLoad={this.handleScriptLoad}>
-                </Script>
-                <button onClick={this.setPreviousTrack}>Previous</button>
-                <button onClick={() => {
-                    if (!this.state.playerPause) {
-                        this.pausePlayback()
-                    }
-                    else {
-                          this.resumePlayback()
-                    }
-                }}>
-                    {this.state.playerPause ? "RESUME" : "PAUSE"}
-                </button>
-                <button onClick={this.setNextTrack}>Next</button>
-                <button onClick={this.startPlayback}>PLAY</button>
-                <label htmlFor="volume-slider">Set Volume</label>
-                <input 
-                    type="range" 
-                    id="volume-slider" 
-                    min="0" 
-                    max="1" 
-                    step="0.01"
-                    // value={this.state.volume}
-                    onChange={this.setPlayerVolume}>
-                </input>
+                <div className="play_controls_container">
+                    <Script 
+                        url="https://sdk.scdn.co/spotify-player.js"
+                        onCreate={this.handleScriptCreate}
+                        onError={this.handleScriptError} 
+                        onLoad={this.handleScriptLoad}>
+                    </Script>
+                    <div className="controls_parent_triplet"></div>
+                    <div className="controls_parent_centre">
+                        <img className="media_button" src={previous} onClick={this.setPreviousTrack}/>
+                        {/* <button onClick={() => {
+                            if (!this.state.playerPause) {
+                                this.pausePlayback()
+                            }
+                            else {
+                                this.resumePlayback()
+                            }
+                        }}>
+                            {this.state.playerPause ? "RESUME" : "PAUSE"}
+                        </button> */}
+                        <img className="media_button" src={play} onClick={this.pausePlaybacknext}/>
+                        <img className="media_button" src={next} onClick={this.setNextTrack}/>
+
+                        
+                        {/* <button onClick={this.setNextTrack}>Next</button>
+                        <button onClick={this.startPlayback}>PLAY</button> */}
+                    </div>
+                    <div className="controls_parent_triplet">
+                        <input 
+                            type="range" 
+                            id="volume-slider" 
+                            min="0" 
+                            max="1" 
+                            step="0.01"
+                            // value={this.state.volume}
+                            onChange={this.setPlayerVolume}>
+                        </input>
+                    </div>
+                </div>
             </>
         )
     }
