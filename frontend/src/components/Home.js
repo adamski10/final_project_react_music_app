@@ -3,6 +3,7 @@ import MoodSelector from './MoodSelector';
 import LogoHome from './Logo.js';
 import MoodTracker from './MoodTracker.js';
 import PlayBar from './PlayBar.js';
+import Song from '../Music/test';
 import PlayList from './PlayList.js';
 import SpotifyWebPlayer from './WebPlayer';
 import mygif2003 from '../Images/coffee.gif';
@@ -16,9 +17,7 @@ class Home extends Component {
             isPlaying: false
         }
         this.handleGeneratePlaylist = this.handleGeneratePlaylist.bind(this)
-        // this.play = this.play.bind(this)
-        // this.pause = this.pause.bind(this)
-        // this.playPause = this.playPause.bind(this)
+        this.setIsPlaying = this.setIsPlaying.bind(this)
     }
 
     componentDidMount() {
@@ -26,44 +25,25 @@ class Home extends Component {
         
     }
 
-    // componentDidUpdate(prevState){
-    //     if(prevState.isPlaying === false){
-    //         this.pause()
-    //         this.play()
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.isPlaying !== this.state.isPlaying) {
+            if (this.state.isPlaying == true) {
+                Song.play()
+            } else {
+                Song.pause()
+            }
+        }
+    }
 
-    // play(){
-    //     const song = new Audio(Song)
-    //     song.play()
-    //     this.setState({
-    //         isPlaying: true
-    //     })
-    // }
+    setIsPlaying() {
 
-    // pause(){
-    //     this.setState({
-    //         isPlaying: false
-    //     })
-    // }
+        this.setState({ isPlaying : !this.state.isPlaying });
 
-    // playPause() {
-        
-    //     if(this.state.isPlaying == false){
-    //         this.play()
-    //     }else{
-    //         this.pause()
-    //     }
-        
-    // }
+    }
 
     handleGeneratePlaylist() {
         this.props.handleSetTracks();
     }
-
-    
-
-    
 
     render() {
         return (
@@ -87,7 +67,7 @@ class Home extends Component {
                 <PlayList handleSelectedSongUri={this.props.handleSelectedSongUri} tracks={this.props.tracks}/>
                 <div className="secret">
                     <div id="hovershow1" className='coffee_gif'>
-                    { <img onClick={this.playPause} src={mygif2003}/> }
+                        <img onClick={this.setIsPlaying} src={mygif2003}/>
                     </div>
                 </div>
             </div>
