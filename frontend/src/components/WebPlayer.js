@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import Script from 'react-load-script';
-import playLogo from '../Images/play_icon.png';
-import pauseLogo from '../Images/pause_icon_test.png';
+import playLogo from '../Images/play_icon.png'; //me testing buttons - feel free to delete/replace
+import pauseLogo from '../Images/pause_icon_test.png'; //me testing buttons - feel free to delete/replace
+import previous from '../Images/prev_icon.svg'
+import next from '../Images/next_button.svg'
+import play from '../Images/play_button.svg'
+import pause from '../Images/pause_button.svg'
 
 class SpotifyWebPlayer extends Component {
 
@@ -245,7 +249,7 @@ class SpotifyWebPlayer extends Component {
                     width="50"
                     height="50">
                 </input>
-                <label htmlFor="seek-bar">Seek bar</label>
+                {/* <label htmlFor="seek-bar">Seek bar</label> */}
                 {/* <input //seek bar stuff - commented out for now
                     type="range"
                     id="seek-bar"

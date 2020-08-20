@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import "./Track.css"
+import PlayIcon from "../Images/play_transparent.png"
 
 class Track extends Component {
 
@@ -8,25 +9,25 @@ class Track extends Component {
         this.handleSongSelection = this.handleSongSelection.bind(this)
     }
 
-    handleSongSelection(event) {
-        console.log(event.target.value)
-        this.props.handleSelectedSongUri(event.target.value)
+    handleSongSelection() {
+        console.log(this.props.uri)
+        this.props.handleSelectedSongUri(this.props.uri)
     }
 
     render() {
         return (
-            <div>
-                <li>
-                    <button className="track-play-button" value={this.props.uri} onClick={this.handleSongSelection}></button>
-                    <img src={this.props.image} alt="" className="album-cover"/>
-                    <div className="track-album-div">
-                        <h3 className="title">{this.props.title}</h3>
-                        <h6 className="album">{this.props.album}</h6>
+            <>
+                
+                <div className="list-item">
+                    <div className="track-play-wrapper">
+                        <img className="track-play-button"  onClick={this.handleSongSelection} src={PlayIcon}/>
                     </div>
-                    <h4 className="artist">By {this.props.artist}</h4>
-                    
-                </li>
-            </div>
+                    <img className="album-cover" src={this.props.image} alt="" />
+                    <h4 className="title">{this.props.title}</h4>
+                    <h6 className="album">{this.props.album}</h6>
+                    <h5 className="artist">By {this.props.artist}</h5> 
+                </div>
+            </>
         )
     }
 }
