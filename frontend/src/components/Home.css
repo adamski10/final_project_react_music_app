@@ -27,6 +27,8 @@
   position: relative;
   padding: 10px;
   box-sizing: border-box;
+  margin-top: 20px;
+  margin-bottom: 20px;
   }
 
 .generate-button::before {
