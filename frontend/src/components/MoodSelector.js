@@ -93,10 +93,10 @@ const MoodSelector = (props) => {
                     label="Mood selector"
                     labelColor="#005a58"
                     knobColor="#005a58"
-                    progressColorFrom="#FFADB2"
-                    progressColorTo="#FF8F9E"
+                    progressColorFrom="#7DC1D4"
+                    progressColorTo="#B4599C"
                     progressSize={15}
-                    trackColor="#F5C6F5"
+                    trackColor="#32bdc2"
                     trackSize={15}
                     hideLabelValue="true"
                     min={0}
