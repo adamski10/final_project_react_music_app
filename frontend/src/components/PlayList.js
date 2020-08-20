@@ -74,9 +74,9 @@ class PlayList extends Component {
           handleSave={this.updateSave}
           handleClickSave={this.handleSavePlaylist}
           />
-          <ul className="tracks-container">
+          <div className="tracks-container">
             { trackNodes }
-          </ul>
+          </div>
         </>
       )
     } return null;
