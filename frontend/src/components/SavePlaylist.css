@@ -35,7 +35,7 @@
     color: #313133;
     background: linear-gradient(to right,rgb(255, 173, 158), rgb(255, 142, 177) );
     border: none;
-    border-radius: 13px;
+    border-radius: 10px;
     transition: all 0.3s ease-in-out 0s;
     cursor: pointer;
     outline: none;
