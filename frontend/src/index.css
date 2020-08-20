@@ -1,20 +1,14 @@
 body {
-  /* margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  
+ /* background: linear-gradient(135deg, rgb(40, 48, 76), rgb(50, 60, 92)); */
+ background-color: rgb(40, 48, 76);
+ background-size: cover;
 }
 @font-face {
   font-family: "CustomFont";
   src: url('./Fonts/museomoderno-variablefont_wght-webfont.woff');
 }
 
-html {
-  background: linear-gradient(135deg, rgb(40, 48, 76), rgb(50, 60, 92));
-  /* background-image: url('./Images/w-qjCHPZbeXCQ-unsplash.jpg'); */
-}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -23,7 +17,7 @@ code {
 
 .home {
   /* border: solid black 1px; */
-  border-radius: 15%;
+  border-radius: 40px;
   background: linear-gradient(50deg, rgb(50, 60, 92), rgb(82, 92, 126));
   display: flex;
   justify-content: center;
@@ -62,7 +56,7 @@ code {
   transform: translateX(80%);
   margin-right: auto;
   /* text-shadow: -7px -6px 6px rgba(0,0,0,0.32); */
-  -webkit-transform: scale(1.1) translate(40px,-2px);
+  -webkit-transform: scale(1.1) translate(40px,-3px);
   font-family: 'CustomFont';
 }
 
@@ -71,7 +65,7 @@ code {
   color: white;
   margin-right: auto;
   /* text-shadow: -7px -6px 6px rgb(255, 248, 248); */
-  -webkit-transform: scale(1.1) translate(40px,-2px);
+  -webkit-transform: scale(1.1) translate(40px,-3px);
   font-family: 'CustomFont';
 }
 
@@ -179,7 +173,7 @@ video {
 .range-wrap:hover .bubble,
 .range-wrap:focus .bubble {
   color: black;
-  transform: translateY(-50%) scale(1.5);
+  transform: translateY(-56%) scale(1.1);
   padding: 0.1em;
 }
 
