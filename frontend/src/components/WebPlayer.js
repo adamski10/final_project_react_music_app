@@ -211,7 +211,7 @@ class SpotifyWebPlayer extends Component {
                 "offset": this.handleSelectedContextUri()
             })
         })
-        this.getCurrentPlayback();
+        // this.getCurrentPlayback();
         this.setState((prevState) => {
             return {
                 ...prevState,
@@ -239,15 +239,14 @@ class SpotifyWebPlayer extends Component {
                     type="image" 
                     onClick={() => {
                         this.playButtonLogic()
-                        this.getPlaybackProgress();
+                        // this.getPlaybackProgress(); - seek bar stuff - commented out for now
                     }} 
                     src={this.playButtonNameLogic()}
                     width="50"
                     height="50">
                 </input>
                 <label htmlFor="seek-bar">Seek bar</label>
-                <audio onTimeUpdate></audio>
-                <input
+                {/* <input //seek bar stuff - commented out for now
                     type="range"
                     id="seek-bar"
                     min="0"
@@ -256,7 +255,7 @@ class SpotifyWebPlayer extends Component {
                     value={this.state.currentPosition}
                     onInput={this.seekBar()}
                     >
-                </input>
+                </input> */}
                 <button onClick={this.setNextTrack}>Next</button>
                 <label htmlFor="volume-slider">Set Volume</label>
                 <input 
