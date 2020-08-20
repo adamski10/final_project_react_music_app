@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import MoodSelector from './MoodSelector';
-import Logo from './Logo.js';
+import LogoHome from './Logo.js';
 import MoodTracker from './MoodTracker.js';
 import PlayBar from './PlayBar.js';
 import PlayList from './PlayList.js';
 import SpotifyWebPlayer from './WebPlayer';
-import mygif2003 from '../Images/coffee.gif'
-// import Song from '../Music/song.mpeg'
+import mygif2003 from '../Images/coffee.gif';
+import "./Home.css"
 
 class Home extends Component {
 
@@ -68,7 +68,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home">
-                <Logo />
+                <LogoHome id="logo-home"/>
                 <MoodSelector 
                 setSliderValence={this.props.setSliderValence} 
                 setEmotion={this.props.setEmotion} 
@@ -76,7 +76,9 @@ class Home extends Component {
                 setSliderDanciness={this.props.setSliderDanciness}
                 setSliderEnergy={this.props.setSliderEnergy}
                 />
-                <button onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
+                <div className="button-wrap">
+                    <button className="generate-button" onClick={this.handleGeneratePlaylist}>Generate Playlist</button>
+                </div>
                 <SpotifyWebPlayer
                     selectedSongUri={this.props.selectedSongUri}
                     accessToken={this.props.accessToken}
