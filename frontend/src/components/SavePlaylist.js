@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import "./SavePlaylist.css";
 
 class SavePlaylist extends Component {
 
@@ -34,15 +35,15 @@ class SavePlaylist extends Component {
         if (this.props.save === true) {
             return (
                 <form action="submit" onSubmit={this.handleSubmit} >
-                    <input type="text" placeholder="Name your playlist" name="playlist-name" onChange={this.handleInput} required/>
-                    <input type="submit" value="Save"/>
+                    <input className="input-field" type="text" placeholder="Name your playlist" name="playlist-name" onChange={this.handleInput} required/>
+                    <input className="save-button" id="save-input" type="submit" value="Save"/>
                 </form>
             )
         }
     
     
         return (
-            <button onClick={this.passSaveToParent}>
+            <button className="save-button" id="save-playlist" onClick={this.passSaveToParent}>
                 Save Playlist
             </button>
         )
@@ -51,3 +52,4 @@ class SavePlaylist extends Component {
 }
 
 export default SavePlaylist;
+

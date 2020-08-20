@@ -1,35 +1,45 @@
-.logo {
-    width: 25em;
-    height: auto;
+@font-face {
+    font-family: "CustomFont";
+    src: url('../Fonts/museomoderno-variablefont_wght-webfont.woff');
 }
 
-#login-page {
-    display: grid;
-    grid-template-rows: 3fr 1fr;
-    justify-content: center;
+.logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 45%;
 }
 
 .login-button {
-    width: 15em;
-    height: 5em;
-    color: #ffffff !important;
-    text-transform: uppercase;
-    text-decoration: none;
-    font-size: larger;
-    background-color: transparent;
-    padding: 20px;
-    border: 4px solid #ffffff !important;
-    display: inline-block;
-    transition: all 0.4s ease 0s;
-    justify-self: center;
-    border-radius: 13px;
+    min-width: 300px;
+    min-height: 60px;
+    font-family: 'CustomFont';
+    font-size: 22px;
+    font-weight: 700;
+    color: #313133;
+    background: linear-gradient(to right,rgb(255, 159, 142), rgb(255, 103, 151) );
+    border: none;
+    border-radius: 15px;
+    box-shadow: 10px 10px 20px rgba(255, 103, 151, .64);
+    transition: all 0.3s ease-in-out 0s;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    box-sizing: border-box;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
 }
-
+  
 .login-button:hover {
-    color: #ffffff !important;
-    background: rgb(225, 62, 114);
-    border-color: rgb(225, 62, 114) !important;
-    transition: all 0.4s ease 0s;
+    color: #313133;
+    transform: translateY(-6px);
+}
+  
+.login-button:hover::before {
+    opacity: 1;
 }
 
 a {

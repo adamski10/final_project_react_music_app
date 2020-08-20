@@ -141,6 +141,12 @@ app.get('/songs', (req,res) => {
   }
 });
 
+app.get("/track_progress", (req, res) => {
+  spotifyApi.getMyCurrentPlaybackState()
+  .then(result => result.json())
+  .then(playbackState => res.json(playbackState))
+})
+
 app.get("/new_playlist/:playlist", (req, res) => {
   
     const playlistName = req.params.playlist
