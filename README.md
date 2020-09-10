@@ -4,4 +4,4 @@ The app was built as a group project. It generates music playlist based on user'
 
 It uses Spotify API to select songs from the playlist that user has already saved on Spotify. The face recogniton is done via Azure API.
 
-![App image](final_project_react_music_app/frontend/src/Images/app.jpeg)
+![App image](app.jpeg)
